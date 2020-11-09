@@ -67,7 +67,11 @@ Material:
 --- !u!1002 &2100001
 EditorExtensionImpl:
   serializedVersion: 6
+<<<<<<< Updated upstream
 --- !u!114 &8883345274082302491
+=======
+--- !u!114 &2027973221962444362
+>>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

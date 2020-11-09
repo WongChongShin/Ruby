@@ -24,10 +24,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream:Ruby/Assets/StylizedHandPaintedDungeon(Free)/Prefabs/Floor.prefab
   m_GameObject: {fileID: 9100508158649072905}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+=======
+  m_GameObject: {fileID: 1000011713842796}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -0, y: 0, z: 1}
+  m_LocalScale: {x: 50, y: 50, z: 50}
+>>>>>>> Stashed changes:Ruby/Assets/ChestFree/chest_close.prefab
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,7 +64,11 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+<<<<<<< Updated upstream:Ruby/Assets/StylizedHandPaintedDungeon(Free)/Prefabs/Floor.prefab
   - {fileID: 2100000, guid: 2e701f9d6b8aa304c93f2af59c1ee5d9, type: 2}
+=======
+  - {fileID: 2100000, guid: 11d782d83e0a6c041a16b355857fbb6d, type: 2}
+>>>>>>> Stashed changes:Ruby/Assets/ChestFree/chest_close.prefab
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
