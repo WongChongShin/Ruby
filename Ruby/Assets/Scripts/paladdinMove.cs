@@ -12,7 +12,7 @@ public class paladdinMove : MonoBehaviour
     private double observeTime = 0.0;
     private double observeFinishTime = 0.05;
     public Animator anim;
-    public static bool noEnermy = false;
+    public static bool noEnermy = true;
     // Start is called before the first frame update
     void Start()
     {
