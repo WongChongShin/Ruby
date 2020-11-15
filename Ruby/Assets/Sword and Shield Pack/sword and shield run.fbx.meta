@@ -4,7 +4,13 @@ ModelImporter:
   serializedVersion: 20101
   internalIDToNameTable:
   - first:
+      74: 1827226128182048838
+    second: Take 001
+  - first:
       74: -203655887218126122
+    second: mixamo.com
+  - first:
+      74: 221988811259610538
     second: chase
   externalObjects: {}
   materials:
@@ -46,7 +52,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
