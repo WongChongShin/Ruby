@@ -18,11 +18,19 @@ public class CameraZoomInAndOut : MonoBehaviour
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
-            zoom.m_Lens.FieldOfView++;
+            if (zoom.m_Lens.FieldOfView <= 50)
+            {
+                zoom.m_Lens.FieldOfView++;
+            }
+            else
+                zoom.m_Lens.FieldOfView = 50;
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            zoom.m_Lens.FieldOfView--;
+            if (zoom.m_Lens.FieldOfView >= 20)
+                zoom.m_Lens.FieldOfView--;
+            else
+                zoom.m_Lens.FieldOfView = 20;
         }
     }
 }
