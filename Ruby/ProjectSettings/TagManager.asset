@@ -6,6 +6,9 @@ TagManager:
   tags:
   - health
   - shadowBond
+  - Fire
+  - Trap
+  - Coin
   layers:
   - Default
   - TransparentFX
