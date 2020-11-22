@@ -9,9 +9,8 @@ public class paladdinMove : MonoBehaviour
     private int finalPoint = 0;
     private NavMeshAgent agent;
     public int speed;
-    private double observeTime = 0.0;
-    private double observeFinishTime = 0.05;
     public Animator anim;
+    private int number = 0;
     public static bool noEnermy = true;
     // Start is called before the first frame update
     void Start()
@@ -21,6 +20,7 @@ public class paladdinMove : MonoBehaviour
         anim = GetComponent<Animator>();
         agent.autoBraking = false;
         anim.SetBool("isObserve", false);
+        nextPoint();
     }
     void nextPoint()
     {
@@ -30,6 +30,7 @@ public class paladdinMove : MonoBehaviour
             {
                 return;
             }
+            agent.isStopped = false;
             anim.SetBool("isObserve", false);
             anim.SetBool("isWalk", true);
             agent.destination = point[finalPoint].position;
@@ -42,16 +43,33 @@ public class paladdinMove : MonoBehaviour
     {
         if (noEnermy)
         {
-            if (agent.remainingDistance < 0.5)
+            if (agent.remainingDistance < 20)
             {
-                observeTime += (double)Time.deltaTime;
-                if (observeTime > observeFinishTime)
+                agent.isStopped = true;
+                if (agent.remainingDistance < 5)
                 {
-                    observeTime = 0;
-                    nextPoint();
+                    anim.SetBool("isObserve", true);
+                    anim.SetBool("isWalk", false);
+                    if (number < 1)
+                    {
+                        StartCoroutine(wait());
+                    }
+                    number++;
                 }
 
             }
+            else
+            {
+                anim.SetBool("isObserve", false);
+                anim.SetBool("isWalk", true);
+                agent.isStopped = false;
+                number = 0;
+            }
         }
+    }
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(5);
+        nextPoint();
     }
 }
