@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     private bool rubyIsDead = false;
-    private int shadowCoin = 0;
-    public AudioClip rubyDieSound;
+
+    public AudioClip rubyDieSound;   
+    public AudioClip coinIsCollected;
 
     AudioSource audio;
 
@@ -14,7 +15,7 @@ public class PlayerCollision : MonoBehaviour
     void Start()
     {
         audio = GetComponent<AudioSource>();
-        
+
     }
 
     // Update is called once per frame
@@ -29,11 +30,6 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Game Over!");
                 rubyDead(rubyDieSound, true);
             }
-
-            if (hit.collider.gameObject.tag == "Coin")
-            {
-                shadowCoin++;
-            }
         }
     }
 
@@ -44,5 +40,18 @@ public class PlayerCollision : MonoBehaviour
         audio.Play();
         rubyIsDead = checkDead;
 
+    }
+
+    //Ruby collect coin
+    void OnTriggerEnter(Collider collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "Coin")
+        {
+            audio.clip = coinIsCollected;
+            audio.Play();
+            ShadowCoinCollect.numOfCoin++;
+            Destroy(collisionInfo.gameObject);
+            ShadowCoinCollect.textOn = true;
+        }
     }
 }
