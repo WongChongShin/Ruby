@@ -27,14 +27,14 @@ public class spartanKingDetectTarget : MonoBehaviour
     }
     void changeAnimation()
     {
-        if (Vector3.Distance(myCharacter, targetEnemy) <= 100 && Vector3.Distance(myCharacter, targetEnemy) > 31)
+        if (Vector3.Distance(myCharacter, targetEnemy) <= 100 && Vector3.Distance(myCharacter, targetEnemy) > 50)
         {
 
             anim.SetBool("isWalking", false);
             anim.SetBool("isCharge", true);
             anim.SetBool("isAttack", false);
         }
-        else if (Vector3.Distance(myCharacter, targetEnemy) <= 30 && Vector3.Distance(myCharacter, targetEnemy) > 17)
+        else if (Vector3.Distance(myCharacter, targetEnemy) <= 49 && Vector3.Distance(myCharacter, targetEnemy) > 5)
         {
             anim.SetBool("isWalking", false);
             anim.SetBool("isCharge", false);
@@ -45,20 +45,20 @@ public class spartanKingDetectTarget : MonoBehaviour
     {
         myCharacter = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         targetEnemy = new Vector3(Enemy.position.x, Enemy.position.y, Enemy.position.z);
-        if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 5)
+        if (Vector3.Distance(myCharacter, targetEnemy) <= 100 && Vector3.Distance(myCharacter, targetEnemy) > 5)
         {
             transform.LookAt(targetEnemy);
             transform.position += transform.forward * Time.deltaTime * speed;
-            if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
+            if (Vector3.Distance(myCharacter, targetEnemy) <= 100 && Vector3.Distance(myCharacter, targetEnemy) > 7)
             {
-                agent.isStopped = true;
+                moveSpartanKing.agent.isStopped = true;
             }
             changeAnimation();
 
         }
         else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
         {
-            agent.isStopped = false;
+            moveSpartanKing.agent.isStopped = false;
             moveSpartanKing.movement();
         }
     }

@@ -60,14 +60,14 @@ public class paladinDetectTarget : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * speed;
             if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
             {
-                agent.isStopped = true;
+                movePaladdin.agent.isStopped = true;
             }
             changeAnimation();
 
         }
         else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
         {
-            agent.isStopped = false;
+            movePaladdin.agent.isStopped = false;
             movePaladdin.movement();
         }
     }

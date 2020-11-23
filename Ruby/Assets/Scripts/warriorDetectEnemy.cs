@@ -57,14 +57,14 @@ public class warriorDetectEnemy : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * speed;
             if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
             {
-                agent.isStopped = true;
+                moveWarrior.agent.isStopped = true;
             }
             changeAnimation();
 
         }
         else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
         {
-            agent.isStopped = false;
+            moveWarrior.agent.isStopped = false;
             moveWarrior.movement();
         }
     }
