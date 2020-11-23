@@ -11,6 +11,7 @@ public class paladdinMove : MonoBehaviour
     public int speed;
     public Animator anim;
     private int number = 0;
+    public static bool noEnermy = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,50 +24,52 @@ public class paladdinMove : MonoBehaviour
     }
     void nextPoint()
     {
-        if (point.Length == 0)
+        if (noEnermy)
         {
-            return;
+            if (point.Length == 0)
+            {
+                return;
+            }
+            agent.isStopped = false;
+            anim.SetBool("isObserve", false);
+            anim.SetBool("isWalk", true);
+            agent.destination = point[finalPoint].position;
+            finalPoint = (finalPoint + 1) % point.Length;
         }
-        agent.isStopped = false;
-        anim.SetBool("isObserve", false);
-        anim.SetBool("isWalk", true);
-        agent.destination = point[finalPoint].position;
-        finalPoint = (finalPoint + 1) % point.Length;
     }
 
     // Update is called once per frame
     void Update()
     {
-        movement();
+        if (noEnermy)
+        {
+            if (agent.remainingDistance < 20)
+            {
+                agent.isStopped = true;
+                if (agent.remainingDistance < 5)
+                {
+                    anim.SetBool("isObserve", true);
+                    anim.SetBool("isWalk", false);
+                    if (number < 1)
+                    {
+                        StartCoroutine(wait());
+                    }
+                    number++;
+                }
+
+            }
+            else
+            {
+                anim.SetBool("isObserve", false);
+                anim.SetBool("isWalk", true);
+                agent.isStopped = false;
+                number = 0;
+            }
+        }
     }
     IEnumerator wait()
     {
         yield return new WaitForSeconds(5);
         nextPoint();
-    }
-    public void movement()
-    {
-        if (agent.remainingDistance < 20)
-        {
-            agent.isStopped = true;
-            if (agent.remainingDistance < 5)
-            {
-                anim.SetBool("isObserve", true);
-                anim.SetBool("isWalk", false);
-                if (number < 1)
-                {
-                    StartCoroutine(wait());
-                }
-                number++;
-            }
-
-        }
-        else
-        {
-            anim.SetBool("isObserve", false);
-            anim.SetBool("isWalk", true);
-            agent.isStopped = false;
-            number = 0;
-        }
     }
 }
