@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class spartanKingDetectTarget : MonoBehaviour
 {
@@ -11,11 +10,9 @@ public class spartanKingDetectTarget : MonoBehaviour
     private spartanKingMove moveSpartanKing;
     private Vector3 myCharacter;
     private Vector3 targetEnemy;
-    private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         moveSpartanKing = gameObject.GetComponent<spartanKingMove>();
     }
@@ -51,14 +48,14 @@ public class spartanKingDetectTarget : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * speed;
             if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
             {
-                agent.isStopped = true;
+                spartanKingMove.agent.isStopped = true;
             }
             changeAnimation();
 
         }
         else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
         {
-            agent.isStopped = false;
+            spartanKingMove.agent.isStopped = false;
             moveSpartanKing.movement();
         }
     }

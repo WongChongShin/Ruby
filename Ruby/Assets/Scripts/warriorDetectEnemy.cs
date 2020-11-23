@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class warriorDetectEnemy : MonoBehaviour
 {
@@ -11,11 +10,9 @@ public class warriorDetectEnemy : MonoBehaviour
     private warriorMove moveWarrior;
     private Vector3 myCharacter;
     private Vector3 targetEnemy;
-    private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         moveWarrior = gameObject.GetComponent<warriorMove>();
     }
@@ -57,14 +54,14 @@ public class warriorDetectEnemy : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * speed;
             if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
             {
-                agent.isStopped = true;
+                warriorMove.agent.isStopped = true;
             }
             changeAnimation();
 
         }
         else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
         {
-            agent.isStopped = false;
+            warriorMove.agent.isStopped = false;
             moveWarrior.movement();
         }
     }

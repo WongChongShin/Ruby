@@ -7,7 +7,7 @@ public class paladdinMove : MonoBehaviour
 {
     public Transform[] point;
     private int finalPoint = 0;
-    private NavMeshAgent agent;
+    public static NavMeshAgent agent;
     public int speed;
     public Animator anim;
     private int number = 0;
