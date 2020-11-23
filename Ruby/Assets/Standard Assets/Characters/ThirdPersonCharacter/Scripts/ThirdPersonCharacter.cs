@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -177,25 +179,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (dodge && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
             {
                 m_Animator.SetBool("IsDodge", true);
-                timer += Time.deltaTime;
-                print("timer: " + timer);
-
-                if (timer > 0.42)
-                {
-                    dodge = false;
-                    timer = 0.0f;
-                    
-                }
-
-                if (dodge == false)
-                    m_Animator.SetBool("IsDodge", false);
-
-                print("dodge: " + dodge);
+                StartCoroutine(wait());
+                m_Animator.SetBool("IsDodge", false);
             }
-            
         }
 
-		void ApplyExtraTurnRotation()
+        IEnumerator wait()
+        {
+            yield return new WaitForSeconds(2);
+        }
+
+            void ApplyExtraTurnRotation()
 		{
 			// help the character turn faster (this is in addition to root rotation in the animation)
 			float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
