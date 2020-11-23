@@ -7,7 +7,7 @@ public class spartanKingMove : MonoBehaviour
 {
     public Transform[] point;
     private int finalPoint = 0;
-    public static NavMeshAgent agent;
+    private NavMeshAgent agent;
     public int speed;
     public Animator anim;
     private int number = 0;

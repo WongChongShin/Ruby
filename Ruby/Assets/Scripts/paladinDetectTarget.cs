@@ -11,9 +11,11 @@ public class paladinDetectTarget : MonoBehaviour
     private paladdinMove movePaladdin;
     private Vector3 myCharacter;
     private Vector3 targetEnemy;
+    private NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         movePaladdin = gameObject.GetComponent<paladdinMove>();
     }
@@ -58,14 +60,14 @@ public class paladinDetectTarget : MonoBehaviour
             transform.position += transform.forward * Time.deltaTime * speed;
             if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
             {
-                paladdinMove.agent.isStopped = true;
+                agent.isStopped = true;
             }
             changeAnimation();
 
         }
         else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
         {
-            paladdinMove.agent.isStopped = false;
+            agent.isStopped = false;
             movePaladdin.movement();
         }
     }
