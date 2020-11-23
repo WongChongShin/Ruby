@@ -9,7 +9,6 @@ TagManager:
   - Fire
   - Trap
   - Coin
-  - Little Box
   layers:
   - Default
   - TransparentFX
