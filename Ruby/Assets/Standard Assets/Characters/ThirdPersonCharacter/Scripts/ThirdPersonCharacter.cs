@@ -174,16 +174,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_GroundCheckDistance = 0.1f;
             }
 
-            if (dodge)
+            if (dodge && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
             {
                 m_Animator.SetBool("IsDodge", true);
                 timer += Time.deltaTime;
                 print("timer: " + timer);
-                if (timer > 0.5)
+
+                if (timer > 0.42)
                 {
-                    m_Animator.SetBool("IsDodge", false);
+                    dodge = false;
                     timer = 0.0f;
+                    
                 }
+
+                if (dodge == false)
+                    m_Animator.SetBool("IsDodge", false);
+
+                print("dodge: " + dodge);
             }
             
         }
