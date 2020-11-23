@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     private bool rubyIsDead = false;
+    //private Transform carriedBox;
 
     public AudioClip rubyDieSound;   
     public AudioClip coinIsCollected;
