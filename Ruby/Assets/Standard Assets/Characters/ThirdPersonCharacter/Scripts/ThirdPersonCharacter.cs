@@ -248,22 +248,22 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_GroundNormal = Vector3.up;
                 m_Animator.applyRootMotion = false;
 
-                if (hitInfo.collider.gameObject.tag == "Stair" )
-                {
-                    print("Hello");
-                    if (Physics.Raycast(temp_ray, out hitInfo))
-                    {
-                        normal = hitInfo.normal;
-                        targetDirection = (transform.position - hitInfo.point).normalized;
-                    }
+                //if (hitInfo.collider.gameObject.tag == "Stair" )
+                //{
+                //    print("Hello");
+                //    if (Physics.Raycast(temp_ray, out hitInfo))
+                //    {
+                //        normal = hitInfo.normal;
+                //        targetDirection = (transform.position - hitInfo.point).normalized;
+                //    }
 
-                    // Finds desired rotation relative to surface normal
-                    targetRotation = Quaternion.FromToRotation(transform.up, normal) * transform.rotation;
+                //    // Finds desired rotation relative to surface normal
+                //    targetRotation = Quaternion.FromToRotation(transform.up, normal) * transform.rotation;
 
-                    // Apply rotation and gravity
-                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, ROTATIONSPEED);
-                    m_Rigidbody.AddForce(targetDirection * GRAVITY);
-                }
+                //    // Apply rotation and gravity
+                //    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, ROTATIONSPEED);
+                //    m_Rigidbody.AddForce(targetDirection * GRAVITY);
+                //}
             }
         }
     }
