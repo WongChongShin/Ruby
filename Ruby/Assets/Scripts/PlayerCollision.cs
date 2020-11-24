@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    //Ruby Die and collect coin declaration
     private bool rubyIsDead = false;
-    //private Transform carriedBox;
-
     public AudioClip rubyDieSound;   
-    public AudioClip coinIsCollected;
+    public AudioClip coinIsCollected;  
+
+    //Collide Bomb declare
+    //public float delay = 1f;
+    //float countDown;
+    //bool hasExploded = false;
+    //public GameObject explosionEffect;
 
     AudioSource audio;
-
-
-    public float delay = 1f;
-    float countDown;
-
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
-        countDown = delay;
+
+        //Collide bomb starting assign
+       // countDown = delay;
 
     }
 
@@ -31,20 +33,25 @@ public class PlayerCollision : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2.0f))
         {
+            //Collide trap
             if (hit.collider.gameObject.tag == "Trap" && rubyIsDead == false)
             {
                 Debug.Log("Game Over!");
                 rubyDead(rubyDieSound, true);
             }
 
-            if (hit.collider.gameObject.tag == "Bomb")
-            {
-                countDown -= Time.deltaTime;
-                if (countDown <= 0f)
-                {
-                    Debug.Log("Boom!");
-                }
-            }
+            //Collide Bomb
+            //if (hit.collider.gameObject.tag == "Bomb")
+            //{
+            //    countDown -= Time.deltaTime;
+            //   if (countDown <= 0f && !hasExploded)
+            //    {
+            //        Debug.Log("Boom!");
+            //        Instantiate(explosionEffect, transform.position, transform.rotation);
+            //        Destroy(gameObject);
+            //        hasExploded = true;
+            //    }
+            //}
         }
     }
 

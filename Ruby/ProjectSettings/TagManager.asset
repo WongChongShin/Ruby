@@ -10,6 +10,7 @@ TagManager:
   - Trap
   - Coin
   - Stair
+  - Bomb
   layers:
   - Default
   - TransparentFX

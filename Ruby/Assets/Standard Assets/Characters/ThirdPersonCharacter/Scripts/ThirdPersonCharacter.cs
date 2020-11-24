@@ -32,13 +32,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         bool m_Crouching;
         private float timer = 0.0f;
         
-        private Vector3 normal = Vector3.down;
-        private Vector3 targetDirection = Vector3.down;
-        private Quaternion targetRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
+       // private Vector3 normal = Vector3.down;
+       // private Vector3 targetDirection = Vector3.down;
+       // private Quaternion targetRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 
-        private const float GRAVITY = -2.0f;
-        private const float RAYDISTANCE = 15.0f;
-        private const float ROTATIONSPEED = 0.15f;
+       // private const float GRAVITY = -2.0f;
+       // private const float RAYDISTANCE = 15.0f;
+        //private const float ROTATIONSPEED = 0.15f;
 
         // When script initializes
 
@@ -227,7 +227,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         {
             RaycastHit hitInfo;
             
-            Ray temp_ray = new Ray(transform.position, -transform.up * RAYDISTANCE);
+            //Ray temp_ray = new Ray(transform.position, -transform.up * RAYDISTANCE);
 
             
 #if UNITY_EDITOR
