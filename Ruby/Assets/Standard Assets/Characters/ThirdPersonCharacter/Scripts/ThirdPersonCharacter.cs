@@ -36,7 +36,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 targetDirection = Vector3.down;
         private Quaternion targetRotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
 
-        private const float GRAVITY = -200.0f;
+        private const float GRAVITY = -2.0f;
         private const float RAYDISTANCE = 15.0f;
         private const float ROTATIONSPEED = 0.15f;
 
@@ -188,14 +188,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             if (dodge && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
             {
-                print("Hello");
                 m_Animator.SetBool("IsDodge", true);
+                StartCoroutine(wait());
             }
+
         }
 
         IEnumerator wait()
         {
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(1);
+            m_Animator.SetBool("IsDodge", false);
         }
 
         void ApplyExtraTurnRotation()
@@ -239,28 +241,30 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_GroundNormal = hitInfo.normal;
                 m_IsGrounded = true;
                 m_Animator.applyRootMotion = true;
-            }
+        }
             else
             {
                 m_IsGrounded = false;
                 m_GroundNormal = Vector3.up;
                 m_Animator.applyRootMotion = false;
 
-                if (Physics.Raycast(temp_ray, out hitInfo))
+                if (hitInfo.collider.gameObject.tag == "Stair" )
                 {
-                    normal = hitInfo.normal;
-                    targetDirection = (transform.position - hitInfo.point).normalized;
+                    print("Hello");
+                    if (Physics.Raycast(temp_ray, out hitInfo))
+                    {
+                        normal = hitInfo.normal;
+                        targetDirection = (transform.position - hitInfo.point).normalized;
+                    }
+
+                    // Finds desired rotation relative to surface normal
+                    targetRotation = Quaternion.FromToRotation(transform.up, normal) * transform.rotation;
+
+                    // Apply rotation and gravity
+                    transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, ROTATIONSPEED);
+                    m_Rigidbody.AddForce(targetDirection * GRAVITY);
                 }
-
-                // Finds desired rotation relative to surface normal
-                targetRotation = Quaternion.FromToRotation(transform.up, normal) * transform.rotation;
-
-                // Apply rotation and gravity
-                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, ROTATIONSPEED);
-                m_Rigidbody.AddForce(targetDirection * GRAVITY);
-
             }
-
         }
     }
 }
