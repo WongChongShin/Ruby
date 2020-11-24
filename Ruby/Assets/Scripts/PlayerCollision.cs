@@ -12,15 +12,10 @@ public class PlayerCollision : MonoBehaviour
 
     AudioSource audio;
 
-
-    public float delay = 1f;
-    float countDown;
-
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
-        countDown = delay;
 
     }
 
@@ -35,15 +30,6 @@ public class PlayerCollision : MonoBehaviour
             {
                 Debug.Log("Game Over!");
                 rubyDead(rubyDieSound, true);
-            }
-
-            if (hit.collider.gameObject.tag == "Bomb")
-            {
-                countDown -= Time.deltaTime;
-                if (countDown <= 0f)
-                {
-                    Debug.Log("Boom!");
-                }
             }
         }
     }
