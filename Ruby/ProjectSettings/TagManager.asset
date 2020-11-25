@@ -14,6 +14,7 @@ TagManager:
   - bossStage
   - enemy
   - bossDoor
+  - box
   layers:
   - Default
   - TransparentFX
