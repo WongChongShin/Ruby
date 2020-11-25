@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class BombBox : MonoBehaviour
 {
-    public GameObject destroyedVersion;
+    public float delay = 1f;
+    float countDown;
+    bool hasExploded = false;
+    public GameObject explosionEffect;
 
     // Start is called before the first frame update
     void Start()
     {
-       // countDown = delay;
+        countDown = delay;
     }
 
     // Update is called once per frame
-    public void Destroy()
+    void Update()
     {
-        if (PlayerCollision.hasExploded == true)
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 2.0f))
         {
-           // Instantiate(destroyedVersion, transform.position, transform.rotation);
+            if (hit.collider.gameObject.tag == "Player")
+            {
+                countDown -= Time.deltaTime;
+                if (countDown <= 0f && !hasExploded)
+                {
+                    Debug.Log("Boom!");
+                    Instantiate(explosionEffect, transform.position, transform.rotation);
+                    Destroy(gameObject);
+                    hasExploded = true;
+                }
+            }
         }
-        
     }
 }
