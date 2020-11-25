@@ -11,9 +11,6 @@ TagManager:
   - Coin
   - Stair
   - Bomb
-  - bossStage
-  - enemy
-  - bossDoor
   layers:
   - Default
   - TransparentFX
@@ -25,8 +22,8 @@ TagManager:
   - 
   - Floor
   - Boundary
-  - backgroundMusic
-  - bossDoor
+  - 
+  - 
   - 
   - 
   - 

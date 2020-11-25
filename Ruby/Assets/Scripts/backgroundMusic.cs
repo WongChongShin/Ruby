@@ -9,56 +9,38 @@ public class backgroundMusic : MonoBehaviour
     GameObject boss;
     public AudioClip BackGroundMusic1;
     public AudioClip BackGroundMusic2;
+    public AudioClip BackGroundMusic3;
     private Vector3 myEnemy;
     private Vector3 myPlayer;
-    private bool audioOne = true;
-    AudioSource audio1;
-    AudioSource audio2;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         enemy = GameObject.FindWithTag("enemy");
         boss = GameObject.FindWithTag("bossStage");
+        audio = GetComponent<AudioSource>();
+        audio.clip = BackGroundMusic2;
+        audio.Play();
 
-        
-
-    }
-    void Awake()
-    {
-        audio1 = GetComponent<AudioSource>();
-        audio1.clip = BackGroundMusic1;
-        audio1.Play();
     }
     // Update is called once per frame
     void Update()
     {
+        
     }
     void OnTriggerEnter(Collider collisionInfo)
     {
-
-        if (collisionInfo.gameObject.tag == "bossDoor")
+        if (collisionInfo.gameObject.tag == "bossStage")
         {
-            if (audio1.isPlaying)
-            {
-                audio1.Stop();
-            }
             StartCoroutine(wait());
-            
+            audio.clip = BackGroundMusic3;
+            audio.Play();
         }
     }
-
     IEnumerator wait()
     {
+        print("Here");
         yield return new WaitForSeconds(2);
-        bossBackgroundMusic();
-
-
-
-    }
-    void bossBackgroundMusic()
-    {
-        audio2 = GetComponent<AudioSource>();
-        audio2.clip = BackGroundMusic2;
-        audio2.Play();
+        audio.Stop();
     }
 }
