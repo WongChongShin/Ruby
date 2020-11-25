@@ -7,22 +7,28 @@ public class PlayerCollision : MonoBehaviour
     //Ruby Die and collect coin declaration
     private bool rubyIsDead = false;
     public AudioClip rubyDieSound;   
-    public AudioClip coinIsCollected;  
+    public AudioClip coinIsCollected;
+    public Animator anim;
 
     //Collide Bomb declare
-    //public float delay = 1f;
-    //float countDown;
-    //bool hasExploded = false;
-    //public GameObject explosionEffect;
+    public float delay = 3f;
+    float countDown;
+    static public bool hasExploded = false;
+    public GameObject explosionEffect;
+
+    public float damageRadius = 0.00f;
 
     AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
 
         //Collide bomb starting assign
-       // countDown = delay;
+        countDown = delay;
+
+        //declare Bomb Class
 
     }
 
@@ -30,7 +36,6 @@ public class PlayerCollision : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2.0f))
         {
             //Collide trap
@@ -41,17 +46,27 @@ public class PlayerCollision : MonoBehaviour
             }
 
             //Collide Bomb
-            //if (hit.collider.gameObject.tag == "Bomb")
-            //{
-            //    countDown -= Time.deltaTime;
-            //   if (countDown <= 0f && !hasExploded)
-            //    {
-            //        Debug.Log("Boom!");
-            //        Instantiate(explosionEffect, transform.position, transform.rotation);
-            //        Destroy(gameObject);
-            //        hasExploded = true;
-            //    }
-            //}
+            if (hit.collider.gameObject.tag == "Bomb")
+            {
+                Debug.Log("Boom!");
+                countDown -= Time.deltaTime;
+
+                if (countDown <= 0f && hasExploded == false)
+                {
+                    Instantiate(explosionEffect, transform.position, transform.rotation);
+                    Destroy(hit.collider.gameObject);
+                    hasExploded = true;
+                    //Physics.OverlapSphere(transform.position, damageRadius);
+                    //foreach (Collider nearByOnject in collider)
+                    //{
+                    //    //Rigidbody rb = nearByObject.GetComponent<RgidBody>();
+                    //    //if (rb != null)
+                    //    //{
+                    //    //    rb.AddExplosionForce(force, transform.position, damageRadius);
+                    //    //}
+                    //}
+                }
+            }
         }
     }
 
@@ -60,8 +75,8 @@ public class PlayerCollision : MonoBehaviour
     {      
         audio.clip = rubyDieSound;
         audio.Play();
+        anim.SetBool("IsDying", true);
         rubyIsDead = checkDead;
-
     }
 
     //Ruby collect coin
