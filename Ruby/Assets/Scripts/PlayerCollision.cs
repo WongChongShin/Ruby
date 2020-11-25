@@ -7,22 +7,24 @@ public class PlayerCollision : MonoBehaviour
     //Ruby Die and collect coin declaration
     private bool rubyIsDead = false;
     public AudioClip rubyDieSound;   
-    public AudioClip coinIsCollected;  
+    public AudioClip coinIsCollected;
+    public Animator anim;
 
     //Collide Bomb declare
-    //public float delay = 1f;
-    //float countDown;
-    //bool hasExploded = false;
-    //public GameObject explosionEffect;
+    public float delay = 1f;
+    float countDown;
+    bool hasExploded = false;
+    public GameObject explosionEffect;
 
     AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
 
         //Collide bomb starting assign
-       // countDown = delay;
+       countDown = delay;
 
     }
 
@@ -41,25 +43,26 @@ public class PlayerCollision : MonoBehaviour
             }
 
             //Collide Bomb
-            //if (hit.collider.gameObject.tag == "Bomb")
-            //{
-            //    countDown -= Time.deltaTime;
-            //   if (countDown <= 0f && !hasExploded)
-            //    {
-            //        Debug.Log("Boom!");
-            //        Instantiate(explosionEffect, transform.position, transform.rotation);
-            //        Destroy(gameObject);
-            //        hasExploded = true;
-            //    }
-            //}
+            if (hit.collider.gameObject.tag == "Bomb")
+            {
+                Debug.Log("Boom!");
+                countDown -= Time.deltaTime;
+                if (countDown <= 0f && !hasExploded)
+                { 
+                    Instantiate(explosionEffect, transform.position, transform.rotation);
+                    Destroy(hit.collider.gameObject);
+                    hasExploded = true;
+                }
+            }
         }
     }
 
     //Ruby dead event
     void rubyDead(AudioClip rubyDieSound, bool checkDead)
-    {      
+    {
+        anim.SetBool("IsDying", true);
         audio.clip = rubyDieSound;
-        audio.Play();
+        audio.Play();      
         rubyIsDead = checkDead;
 
     }
