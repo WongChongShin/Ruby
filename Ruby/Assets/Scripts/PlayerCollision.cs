@@ -10,9 +10,11 @@ public class PlayerCollision : MonoBehaviour
     public AudioClip coinIsCollected;
     public Animator anim;
 
+    //Ruby collect key
     public int numOfKey = 0;
     static public bool doorOpen = false;
-
+    static public bool youNeedKey = false;
+    
     //Collide Bomb declare
     public float delay = 1f;
     float countDown;
@@ -25,9 +27,9 @@ public class PlayerCollision : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
-
+        
         //Collide bomb starting assign
-       countDown = delay;
+        countDown = delay;
 
     }
 
@@ -46,11 +48,15 @@ public class PlayerCollision : MonoBehaviour
             }
             //Collide locked door
             else if (hit.collider.gameObject.tag == "LockedDoor" && rubyIsDead == false)
-            {
-                Debug.Log("Opening!");
+            {               
                 if (numOfKey > 0)
                 {
+                    Debug.Log("Opening!");
                     doorOpen = true;
+                }
+                else
+                {
+                    youNeedKey = true;
                 }
             }
 
