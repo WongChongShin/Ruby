@@ -6,7 +6,6 @@ public class backgroundMusic : MonoBehaviour
 {
     public AudioClip BackGroundMusic1;
     public AudioClip BackGroundMusic2;
-    private bool audioOne = true;
     AudioSource audio1;
     AudioSource audio2;
     // Start is called before the first frame update
