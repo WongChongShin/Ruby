@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class backgroundMusic : MonoBehaviour
 {
-    public Transform player;
-    GameObject enemy;
-    GameObject boss;
     public AudioClip BackGroundMusic1;
     public AudioClip BackGroundMusic2;
     private bool audioOne = true;
@@ -15,10 +12,7 @@ public class backgroundMusic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GameObject.FindWithTag("enemy");
-        boss = GameObject.FindWithTag("bossStage");
-
-        
+        audio2 = GetComponent<AudioSource>();
 
     }
     void Awake()
@@ -36,11 +30,19 @@ public class backgroundMusic : MonoBehaviour
 
         if (collisionInfo.gameObject.tag == "bossDoor")
         {
+
             if (audio1.isPlaying)
             {
                 audio1.Stop();
             }
-            StartCoroutine(wait());
+            else if (!audio2.isPlaying)
+            {
+                StartCoroutine(wait());
+            }
+            else
+            {
+                return;
+            }
             
         }
     }
@@ -55,8 +57,7 @@ public class backgroundMusic : MonoBehaviour
     }
     void bossBackgroundMusic()
     {
-        audio2 = GetComponent<AudioSource>();
-        audio2.clip = BackGroundMusic2;
-        audio2.Play();
+            audio2.clip = BackGroundMusic2;
+            audio2.Play();
     }
 }
