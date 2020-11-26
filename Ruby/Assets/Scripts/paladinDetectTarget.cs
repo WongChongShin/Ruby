@@ -12,12 +12,16 @@ public class paladinDetectTarget : MonoBehaviour
     private Vector3 myCharacter;
     private Vector3 targetEnemy;
     private NavMeshAgent agent;
+    private bool die = false;
+    public AudioClip enemyDieSound;
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         movePaladdin = gameObject.GetComponent<paladdinMove>();
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,23 +56,53 @@ public class paladinDetectTarget : MonoBehaviour
     }
     public void detectionChecker()
     {
-        myCharacter = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        targetEnemy = new Vector3(Enemy.position.x, Enemy.position.y, Enemy.position.z);
-        if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 5)
+        if (die == true)
         {
-            transform.LookAt(targetEnemy);
-            transform.position += transform.forward * Time.deltaTime * speed;
-            if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
+            movePaladdin.agent.isStopped = true;
+            anim.SetBool("isWalk", false);
+            anim.SetBool("isChase", false);
+            anim.SetBool("isSlay", false);
+            anim.SetBool("isAttack", false);
+            anim.SetBool("isObserve", false);
+            
+        }
+        else
+        {
+            myCharacter = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            targetEnemy = new Vector3(Enemy.position.x, Enemy.position.y, Enemy.position.z);
+            if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 5)
             {
-                movePaladdin.agent.isStopped = true;
-            }
-            changeAnimation();
+                transform.LookAt(targetEnemy);
+                transform.position += transform.forward * Time.deltaTime * speed;
+                if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 7)
+                {
+                    movePaladdin.agent.isStopped = true;
+                }
+                changeAnimation();
 
+            }
+            else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
+            {
+                movePaladdin.agent.isStopped = false;
+                movePaladdin.movement();
+            }
         }
-        else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
+    }
+    void OnTriggerEnter(Collider collisionInfo)
+    {
+        if (collisionInfo.gameObject.tag == "box"|| collisionInfo.gameObject.tag == "explosion")
         {
-            movePaladdin.agent.isStopped = false;
-            movePaladdin.movement();
+            anim.SetBool("isDie", true);
+            die = true;
+            StartCoroutine(wait());
         }
+    }
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1);
+        audio.clip = enemyDieSound;
+        audio.Play();
+        Destroy(gameObject, 3);
+
     }
 }
