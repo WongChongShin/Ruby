@@ -23,7 +23,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: bush02
-    second: {fileID: 2100000, guid: 248b7cf269a683c4fa35eae347e84bfd, type: 2}
+    second: {fileID: 2100000, guid: b6313ab7f9041e94981fae58c2c93eff, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
