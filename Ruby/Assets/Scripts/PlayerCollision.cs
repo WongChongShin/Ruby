@@ -54,6 +54,13 @@ public class PlayerCollision : MonoBehaviour
                     hasExploded = true;
                 }
             }
+
+            //if (hit.collider.gameObject.tag == "Floor")
+            //{
+            //    Debug.Log("Grounding!");
+            //    anim.SetBool("OnGround", true);
+            //}
+            
         }
     }
 
