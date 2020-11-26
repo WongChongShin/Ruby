@@ -10,6 +10,8 @@ public class PlayerCollision : MonoBehaviour
     public AudioClip coinIsCollected;
     public Animator anim;
 
+    public int numOfKey = 0;
+
     //Collide Bomb declare
     public float delay = 1f;
     float countDown;
@@ -77,6 +79,14 @@ public class PlayerCollision : MonoBehaviour
             ShadowCoinCollect.numOfCoin++;
             Destroy(collisionInfo.gameObject);
             ShadowCoinCollect.textOn = true;
+        }
+
+        if (collisionInfo.gameObject.tag == "Key")
+        {
+            audio.clip = coinIsCollected;
+            audio.Play();
+            numOfKey++;
+            Destroy(collisionInfo.gameObject);
         }
     }
 }
