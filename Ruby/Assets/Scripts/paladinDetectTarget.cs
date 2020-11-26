@@ -90,9 +90,12 @@ public class paladinDetectTarget : MonoBehaviour
     }
     void OnTriggerEnter(Collider collisionInfo)
     {
-        anim.SetBool("isDie", true);
-        die = true;
-        StartCoroutine(wait());
+        if (collisionInfo.gameObject.tag == "box"|| collisionInfo.gameObject.tag == "explosion")
+        {
+            anim.SetBool("isDie", true);
+            die = true;
+            StartCoroutine(wait());
+        }
     }
     IEnumerator wait()
     {
