@@ -9,6 +9,8 @@ public class backgroundMusic : MonoBehaviour
     GameObject boss;
     public AudioClip BackGroundMusic1;
     public AudioClip BackGroundMusic2;
+    private Vector3 myEnemy;
+    private Vector3 myPlayer;
     private bool audioOne = true;
     AudioSource audio1;
     AudioSource audio2;
