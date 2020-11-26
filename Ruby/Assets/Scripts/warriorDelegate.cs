@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class delegatePaladdin : MonoBehaviour
+public class warriorDelegate : MonoBehaviour
 {
     public delegate void MyDelegate();
     public static event MyDelegate enemyDelegate;
-    private paladinDetectTarget detect;
+    private warriorDetectEnemy detect;
     // Start is called before the first frame update
     void Start()
     {
-        detect = gameObject.GetComponent<paladinDetectTarget>();
+        detect = gameObject.GetComponent<warriorDetectEnemy>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        delegatePaladdin.enemyDelegate = detect.detectionChecker;
+        warriorDelegate.enemyDelegate = detect.detectionChecker;
         enemyDelegate();
     }
 }
