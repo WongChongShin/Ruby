@@ -14,6 +14,19 @@ TagManager:
   - bossStage
   - enemy
   - bossDoor
+  - PlayerUI
+  - Weapon
+  - Enemy
+  - Ignore Ragdoll
+  - CompanionAI
+  - LadderTrigger
+  - Action
+  - Interactable
+  - Collectable
+  - LookAt
+  - Boss
+  - Key
+  - LockedDoor
   layers:
   - Default
   - TransparentFX

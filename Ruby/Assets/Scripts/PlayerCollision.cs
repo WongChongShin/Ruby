@@ -11,6 +11,7 @@ public class PlayerCollision : MonoBehaviour
     public Animator anim;
 
     public int numOfKey = 0;
+    static public bool doorOpen = false;
 
     //Collide Bomb declare
     public float delay = 1f;
@@ -43,9 +44,18 @@ public class PlayerCollision : MonoBehaviour
                 Debug.Log("Game Over!");
                 rubyDead(rubyDieSound, true);
             }
+            //Collide locked door
+            else if (hit.collider.gameObject.tag == "LockedDoor" && rubyIsDead == false)
+            {
+                Debug.Log("Opening!");
+                if (numOfKey > 0)
+                {
+                    doorOpen = true;
+                }
+            }
 
             //Collide Bomb
-            
+
         }
     }
 
@@ -53,7 +63,7 @@ public class PlayerCollision : MonoBehaviour
     //Ruby dead event
     void rubyDead(AudioClip rubyDieSound, bool checkDead)
     {
-        anim.SetBool("IsDying", true);
+        anim.SetBool("IsDead", true);
         audio.clip = rubyDieSound;
         audio.Play();      
         rubyIsDead = checkDead;
@@ -72,8 +82,9 @@ public class PlayerCollision : MonoBehaviour
             ShadowCoinCollect.textOn = true;
         }
 
-        if (collisionInfo.gameObject.tag == "Key")
+        else if (collisionInfo.gameObject.tag == "Key")
         {
+            Debug.Log("Key get!");
             audio.clip = coinIsCollected;
             audio.Play();
             numOfKey++;
