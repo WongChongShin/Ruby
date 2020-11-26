@@ -45,19 +45,10 @@ public class PlayerCollision : MonoBehaviour
             }
 
             //Collide Bomb
-            if (hit.collider.gameObject.tag == "Bomb")
-            {
-                Debug.Log("Boom!");
-                countDown -= Time.deltaTime;
-                if (countDown <= 0f && !hasExploded)
-                { 
-                    Instantiate(explosionEffect, transform.position, transform.rotation);
-                    Destroy(hit.collider.gameObject);
-                    hasExploded = true;
-                }
-            }
+            
         }
     }
+
 
     //Ruby dead event
     void rubyDead(AudioClip rubyDieSound, bool checkDead)
