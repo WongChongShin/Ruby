@@ -41,7 +41,6 @@ public class bossStageDoor : MonoBehaviour
     {
         if (collisionInfo.gameObject.tag == "bossStage")
         {
-            print("Collide");
             triggerDoor = true;
         }
     }
