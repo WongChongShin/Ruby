@@ -14,6 +14,7 @@ public class paladinDetectTarget : MonoBehaviour
     private NavMeshAgent agent;
     private bool die = false;
     public AudioClip enemyDieSound;
+
     AudioSource audio;
     // Start is called before the first frame update
     void Start()
