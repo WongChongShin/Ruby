@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThrowCoin : MonoBehaviour
 {
     public AudioClip throwSound;
-    public GameObject CoconutObject;
+    public GameObject objectThrow;
     public float ThrowForce;
     private AudioSource audio;
 
@@ -20,16 +20,17 @@ public class ThrowCoin : MonoBehaviour
     {
         if (Input.GetButtonDown("ThrowCoin"))
         {
-            GameObject temp = Instantiate(CoconutObject, transform.position, transform.rotation);
-            temp.name = "CastFlash";
+            Debug.Log("Coin has been thrown");
+            Instantiate(objectThrow, transform.position, transform.rotation);
+            
 
-            if (temp.GetComponent<Rigidbody>() == null)
-            {
-                Debug.Log("No RigidBody Found!");
-                temp.AddComponent<Rigidbody>();
-            }
+            //if (temp.GetComponent<Rigidbody>() == null)
+            //{
+            //    Debug.Log("No RigidBody Found!");
+            //    AddComponent<Rigidbody>();
+            //}
 
-            Rigidbody rb = temp.GetComponent<Rigidbody>();
+            Rigidbody rb = GetComponent<Rigidbody>();
             rb.velocity = transform.TransformDirection(new Vector3(0, 0, ThrowForce));
             audio.clip = throwSound;
             audio.Play();
