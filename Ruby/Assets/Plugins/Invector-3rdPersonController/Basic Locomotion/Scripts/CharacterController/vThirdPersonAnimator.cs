@@ -103,7 +103,8 @@ namespace Invector.vCharacterController
             RollAnimation();
 
             LocomotionAnimation();
-            DeadAnimation();
+            //Shin off begin
+            //DeadAnimation();
         }
 
         public virtual void LayerControl()
@@ -165,7 +166,7 @@ namespace Invector.vCharacterController
             animator.SetBool("IsStrafing", isStrafing);
             animator.SetBool("IsCrouching", isCrouching);
             animator.SetBool("IsGrounded", isGrounded);
-            animator.SetBool("isDead", isDead);
+ //Shin off           //animator.SetBool("isDead", isDead);
             animator.SetFloat("GroundDistance", groundDistance);
 
             if (!isGrounded)
@@ -246,15 +247,16 @@ namespace Invector.vCharacterController
             Vector2 speedVec = new Vector2(input.x, input.y);
             _speed = Mathf.Clamp(speedVec.magnitude, 0, 1);
 
-            if (_speed > 0.01f) // dead zone
-            {
-                Vector3 axis = Vector3.Cross(rootDirection, moveDirection);
-                _direction = Vector3.Angle(rootDirection, moveDirection) / 180.0f * (axis.y < 0 ? -1 : 1);
-            }
-            else
-            {
-                _direction = 0.0f;
-            }
+            //Shin off
+            //if (_speed > 0.01f) // dead zone
+            //{
+            //    Vector3 axis = Vector3.Cross(rootDirection, moveDirection);
+            //    _direction = Vector3.Angle(rootDirection, moveDirection) / 180.0f * (axis.y < 0 ? -1 : 1);
+            //}
+            //else
+            //{
+            //    _direction = 0.0f;
+            //}
         }
 
         #endregion
@@ -283,40 +285,43 @@ namespace Invector.vCharacterController
                 return Quaternion.LookRotation(newDir);
             }
         }
+        //Shin off begin
+        //protected virtual void DeadAnimation()
+        //{
+        //    if (!isDead) return;
 
-        protected virtual void DeadAnimation()
-        {
-            if (!isDead) return;
+        //    if (!triggerDieBehaviour)
+        //    {
+        //        triggerDieBehaviour = true;
+        //        DeathBehaviour();
+        //    }
+            
+            //// death by animation
+            //if (deathBy == DeathBy.Animation)
+            //{
+            //    if (fullBodyInfo.IsName("Dead"))
+            //    {
+            //        if (fullBodyInfo.normalizedTime >= 0.99f && groundDistance <= 0.15f)
+            //            RemoveComponents();
+            //    }
+            //}
 
-            if (!triggerDieBehaviour)
-            {
-                triggerDieBehaviour = true;
-                DeathBehaviour();
-            }
-
-            // death by animation
-            if (deathBy == DeathBy.Animation)
-            {
-                if (fullBodyInfo.IsName("Dead"))
-                {
-                    if (fullBodyInfo.normalizedTime >= 0.99f && groundDistance <= 0.15f)
-                        RemoveComponents();
-                }
-            }
-            // death by animation & ragdoll after a time
-            else if (deathBy == DeathBy.AnimationWithRagdoll)
-            {
-                if (fullBodyInfo.IsName("Dead"))
-                {
-                    // activate the ragdoll after the animation finish played
-                    if (fullBodyInfo.normalizedTime >= 0.8f)
-                        onActiveRagdoll.Invoke();
-                }
-            }
-            // death by ragdoll
-            else if (deathBy == DeathBy.Ragdoll)
-                onActiveRagdoll.Invoke();
-        }
+            
+            //// death by animation & ragdoll after a time
+            //else if (deathBy == DeathBy.AnimationWithRagdoll)
+            //{
+            //    if (fullBodyInfo.IsName("Dead"))
+            //    {
+            //        // activate the ragdoll after the animation finish played
+            //        if (fullBodyInfo.normalizedTime >= 0.8f)
+            //            onActiveRagdoll.Invoke();
+            //    }
+            //}
+            //// death by ragdoll
+            //else if (deathBy == DeathBy.Ragdoll)
+            //    onActiveRagdoll.Invoke();
+            //Shin off end
+        //}
 
         public virtual void SetActionState(int value)
         {

@@ -70,7 +70,7 @@ public class PlayerCollision : MonoBehaviour
     //Ruby dead event
     void rubyDead(AudioClip rubyDieSound, bool checkDead)
     {
-        anim.SetBool("IsDead", true);
+        anim.SetBool("isDead", true);
         audio.clip = rubyDieSound;
         audio.Play();      
         rubyIsDead = checkDead;

@@ -298,7 +298,7 @@ namespace Invector.vCharacterController
 
         public virtual void UpdateMotor()
         {
-            CheckHealth();
+            //CheckHealth();
             CheckStamina();
             CheckGround();
             CheckRagdoll();
@@ -373,13 +373,14 @@ namespace Invector.vCharacterController
                 animator.SetBool("isDead", true);
         }
 
-        void CheckHealth()
-        {
-            if (isDead && currentHealth > 0)
-            {
-                isDead = false;
-            }
-        }
+//Shin off
+        //void CheckHealth()
+        //{
+        //    if (isDead && currentHealth > 0)
+        //    {
+        //        isDead = false;
+        //    }
+        //}
 
         void CheckStamina()
         {
