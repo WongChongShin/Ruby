@@ -53,6 +53,7 @@ public class PlayerCollision : MonoBehaviour
                 {
                     Debug.Log("Opening!");
                     doorOpen = true;
+                   
                 }
                 else
                 {
