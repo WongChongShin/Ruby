@@ -20,17 +20,20 @@ public class BombBox : MonoBehaviour
 
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2.0f) && hit.collider.gameObject.tag == "Player")
         {
-            Debug.Log("Boom!");
-            StartCoroutine(wait());
+                if (hit.collider.gameObject.tag == "Player")
+                {
+                    Debug.Log("Boom!");
+                    StartCoroutine(wait());
+                }
 
-            IEnumerator wait()
-            {
-                yield return new WaitForSeconds(1);
-                Instantiate(explosionEffect, transform.position, transform.rotation);
-                Destroy(gameObject);
-                hasExploded = true;
-            }
-
+                IEnumerator wait()
+                {
+                    yield return new WaitForSeconds(1);
+                    Instantiate(explosionEffect, transform.position, transform.rotation);
+                    Destroy(gameObject);
+                    hasExploded = true;
+                }
+            
         }
     }
 }

@@ -933,8 +933,9 @@ namespace Invector.vCharacterController
         {
             if (isCrouching || isRolling)
             {
-                _capsuleCollider.center = colliderCenter / crouchHeightReduction;
-                _capsuleCollider.height = colliderHeight / crouchHeightReduction;
+                _capsuleCollider.center = colliderCenter;
+                _capsuleCollider.radius = colliderRadius;
+                _capsuleCollider.height = colliderHeight;
             }
             else
             {
