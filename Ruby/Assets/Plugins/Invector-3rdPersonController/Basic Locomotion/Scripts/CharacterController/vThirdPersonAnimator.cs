@@ -220,6 +220,7 @@ namespace Invector.vCharacterController
                 animator.SetFloat("TurnOnSpotDirection", -1);
             else
                 animator.SetFloat("TurnOnSpotDirection", 0);
+
         }
 
         protected virtual void FreeTurnOnSpot(float direction)

@@ -60,11 +60,6 @@ public class PlayerCollision : MonoBehaviour
                     youNeedKey = true;
                 }
             }
-            //Collide big box
-            else if (hit.collider.gameObject.tag == "BigBox" && rubyIsDead == false)
-            {
-                anim.SetBool("isPushing", true);
-            }
 
             //Collide Bomb
 
