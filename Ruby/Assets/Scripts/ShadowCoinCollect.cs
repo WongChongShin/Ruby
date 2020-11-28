@@ -23,7 +23,7 @@ public class ShadowCoinCollect : MonoBehaviour
     {
         if (textOn)
         {
-            if (numOfCoin > 0)
+            if (numOfCoin >= 0)
             {
                 totalCoin.text = "x"  + numOfCoin.ToString();
             }

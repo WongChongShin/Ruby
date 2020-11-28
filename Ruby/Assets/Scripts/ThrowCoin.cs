@@ -28,6 +28,7 @@ public class ThrowCoin : MonoBehaviour
         
         IEnumerator wait()
         {
+            
             yield return new WaitForSeconds(1);
             GameObject temp = Instantiate(objectThrow, transform.position, transform.rotation);
             temp.name = "CastFlash";
