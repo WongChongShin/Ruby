@@ -20,7 +20,6 @@ public class spartanKingDetectTarget : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        GetComponent<NavMeshAgent>().speed = speed;
         anim = GetComponent<Animator>();
         moveSpartanKing = gameObject.GetComponent<spartanKingMove>();
     }
@@ -36,7 +35,6 @@ public class spartanKingDetectTarget : MonoBehaviour
         
         if (Vector3.Distance(myCharacter, targetEnemy) <= 49 && Vector3.Distance(myCharacter, targetEnemy) > 0)
         {
-            agent.isStopped = true;
             anim.SetBool("isWalking", false);
             anim.SetBool("isCharge", false);
             anim.SetBool("isAttack", true);
@@ -45,14 +43,12 @@ public class spartanKingDetectTarget : MonoBehaviour
         {
             if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
             {
-                agent.isStopped = false;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", true);
                 anim.SetBool("isAttack", false);
             }
             else
             {
-                agent.isStopped = true;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", false);
                 anim.SetBool("isAttack", false);
@@ -70,7 +66,7 @@ public class spartanKingDetectTarget : MonoBehaviour
                 if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
                 {
                     transform.LookAt(targetEnemy);
-                    agent.destination=targetEnemy;
+                    transform.position += transform.forward * Time.deltaTime * speed;
                 }
             }
             changeAnimation();
@@ -100,7 +96,7 @@ public class spartanKingDetectTarget : MonoBehaviour
     }
     IEnumerator wait1()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         electronicCreate();
     }
     void getDoorPosition()

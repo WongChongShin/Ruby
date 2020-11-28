@@ -534,34 +534,34 @@ InputManager:
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: equip cannon
+    m_Name: Debug Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: e
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: 
-    altPositiveButton: e
+    altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 0
+    type: 2
     axis: 5
     joyNum: 0
   - serializedVersion: 3
-    m_Name: shoot
+    m_Name: Debug Horizontal
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: r
+    negativeButton: left
+    positiveButton: right
     altNegativeButton: 
-    altPositiveButton: r
+    altPositiveButton: 
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 0
+    type: 2
     axis: 5
     joyNum: 0
