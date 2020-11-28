@@ -9,6 +9,9 @@ public class ThrowCoin : MonoBehaviour
     public float ThrowForce;
     private AudioSource audio;
 
+    //teleport
+    public GameObject player; 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,22 +21,35 @@ public class ThrowCoin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("ThrowCoin"))
+        if (Input.GetButtonDown("ThrowCoin") && ShadowCoinCollect.numOfCoin >= 5)
         {
-            Debug.Log("Coin has been thrown");
-            Instantiate(objectThrow, transform.position, transform.rotation);
-            
+            StartCoroutine(wait());
+        }
+        
+        IEnumerator wait()
+        {
+            yield return new WaitForSeconds(1);
+            GameObject temp = Instantiate(objectThrow, transform.position, transform.rotation);
+            temp.name = "CastFlash";
 
-            //if (temp.GetComponent<Rigidbody>() == null)
-            //{
-            //    Debug.Log("No RigidBody Found!");
-            //    AddComponent<Rigidbody>();
-            //}
+            if (temp.GetComponent<Rigidbody>() == null)
+            {
+                Debug.Log("No RigidBody Found!");
+                temp.AddComponent<Rigidbody>();
+            }
 
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb.velocity = transform.TransformDirection(new Vector3(0, 0, ThrowForce));
+            Rigidbody rb = temp.GetComponent<Rigidbody>();
+            rb.velocity = transform.TransformDirection(new Vector3(ThrowForce, 0, ThrowForce));
             audio.clip = throwSound;
             audio.Play();
+            StartCoroutine(wait2());
+
+            IEnumerator wait2()
+            {
+                yield return new WaitForSeconds(2);
+                player.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y+10, temp.transform.position.z);
+            }
+            ShadowCoinCollect.numOfCoin -= 5;
         }
     }
 }
