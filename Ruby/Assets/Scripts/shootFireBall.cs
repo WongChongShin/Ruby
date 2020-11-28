@@ -80,8 +80,8 @@ public class shootFireBall : MonoBehaviour
             if (temp.GetComponent<Rigidbody>() == null)
             {
                 temp.AddComponent<Rigidbody>();
-                temp.AddComponent<destroyFireBall>();
             }
+            temp.AddComponent<destroyFireBall>();
             Rigidbody rb = temp.GetComponent<Rigidbody>();
             rb.velocity = fireball.transform.TransformDirection(new Vector3(0, 0, throwForce));
         }

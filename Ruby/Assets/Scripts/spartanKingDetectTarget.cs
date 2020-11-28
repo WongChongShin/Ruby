@@ -27,6 +27,7 @@ public class spartanKingDetectTarget : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         GetComponent<NavMeshAgent>().speed = speed;
         anim = GetComponent<Animator>();
+        agent.autoBraking = false;
         moveSpartanKing = gameObject.GetComponent<spartanKingMove>();
     }
 
@@ -50,14 +51,13 @@ public class spartanKingDetectTarget : MonoBehaviour
         {
             if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
             {
-                agent.isStopped = false;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", true);
                 anim.SetBool("isAttack", false);
             }
             else
             {
-                agent.isStopped = true;
+                
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", false);
                 anim.SetBool("isAttack", false);
@@ -68,37 +68,35 @@ public class spartanKingDetectTarget : MonoBehaviour
     {
         myCharacter = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         targetEnemy = new Vector3(Enemy.position.x, Enemy.position.y, Enemy.position.z);
-        if (spartanHealthPoint <= 0)
-        {
-            agent.isStopped = true;
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isCharge", false);
-            anim.SetBool("isAttack", false);
 
-        }
-        else
+        if (startChase == true)
         {
-            if (startChase == true)
+            if (Vector3.Distance(myCharacter, targetEnemy) > 5)
             {
-                if (Vector3.Distance(myCharacter, targetEnemy) > 15)
+                if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
                 {
-                    if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
-                    {
-                        transform.LookAt(targetEnemy);
-                        agent.destination = targetEnemy;
-                    }
+                    agent.isStopped = false;
+                    agent.destination = targetEnemy;
                 }
-                changeAnimation();
-                if (Vector3.Distance(myCharacter, targetEnemy) > 49)
+            }
+            changeAnimation();
+            if (Vector3.Distance(myCharacter, targetEnemy) > 49)
+            {
+                if (particleOn == false)
                 {
-                    if (particleOn == false)
-                    {
-                        particleOn = true;
-                        StartCoroutine(wait1());
-                    }
+                    particleOn = true;
+                    StartCoroutine(wait1());
                 }
+            }
+            if (spartanHealthPoint <= 0)
+            {
+                agent.isStopped = true;
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isCharge", false);
+                anim.SetBool("isAttack", false);
 
             }
+
         }
     }
     void electronicCreate()
@@ -106,17 +104,19 @@ public class spartanKingDetectTarget : MonoBehaviour
         if (electricalVolt.GetComponent<ParticleSystem>().isPlaying)
         {
             electricalVolt.GetComponent<ParticleSystem>().Stop();
+            agent.isStopped = false;
             particleOn = false;
         }
         else
         {
             electricalVolt.GetComponent<ParticleSystem>().Play();
+            agent.isStopped = true;
             particleOn = false;
         }
     }
     IEnumerator wait1()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         electronicCreate();
     }
     void getDoorPosition()
