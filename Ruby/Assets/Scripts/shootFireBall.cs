@@ -7,11 +7,11 @@ public class shootFireBall : MonoBehaviour
 {
     public GameObject fireball;
     public Transform player;
-    public RawImage aimUI;
+    public GameObject aimUI;
     // Start is called before the first frame update
     void Start()
     {
-        aimUI = GetComponent<RawImage>();
+        //aimUI = GetComponent<RawImage>();
     }
 
     // Update is called once per frame
@@ -19,11 +19,12 @@ public class shootFireBall : MonoBehaviour
     {
         fireball.GetComponent<ParticleSystem>().Play();
     }
-    void OnCollisionEnter(Collider collisionInfo)
+    void OnTriggerEnter(Collider collisionInfo)
     {
-        if(collisionInfo.gameObject.tag == "cannon")
+        if(collisionInfo.gameObject.tag == "Player")
         {
-            if(Input.GetButtonDown("equip cannon"))
+            aimUI.SetActive(true);
+            if (Input.GetButtonDown("equip cannon"))
             {
                 print("here");
                 controlCannon();
@@ -32,6 +33,6 @@ public class shootFireBall : MonoBehaviour
     }
     void controlCannon()
     {
-        gameObject.SetActive(false);
+        aimUI.SetActive(false);
     }
 }
