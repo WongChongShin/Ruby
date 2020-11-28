@@ -8,7 +8,8 @@ public class shootFireBall : MonoBehaviour
     public GameObject fireball;
     public Transform player;
     public GameObject aimUI;
-    public GameObject fps;
+    public GameObject firstPersonCamera;
+    public GameObject thirdPersonCamera;
     private bool aim=false;
     private bool checkAim = false;
     public float throwForce;
@@ -57,19 +58,17 @@ public class shootFireBall : MonoBehaviour
         }
         if (checkAim == true)
         {
-            mouseMovement();
+            firstPersonCamera.SetActive(true);
+            thirdPersonCamera.SetActive(false);
+            (transform.GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
             shoot();
         }
         else
         {
-            fps.SetActive(false);
+            firstPersonCamera.SetActive(false);
+            thirdPersonCamera.SetActive(true);
+            (transform.GetComponent("FirstPersonController") as MonoBehaviour).enabled = false;
         }
-    }
-    void mouseMovement()
-    {
-        fps.SetActive(true);
-        (transform.GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
-
     }
     void shoot()
     {
@@ -80,7 +79,6 @@ public class shootFireBall : MonoBehaviour
 
             if (temp.GetComponent<Rigidbody>() == null)
             {
-                Debug.Log("no Rigidbody found!");
                 temp.AddComponent<Rigidbody>();
                 temp.AddComponent<destroyFireBall>();
             }

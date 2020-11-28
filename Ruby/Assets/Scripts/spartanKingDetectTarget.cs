@@ -13,9 +13,14 @@ public class spartanKingDetectTarget : MonoBehaviour
     private Vector3 targetEnemy;
     private NavMeshAgent agent;
     public GameObject electricalVolt;
+    public GameObject fireball;
     private bool particleOn = false;
     private bool startChase = false;
     public Transform[] door;
+    private int spartanHealthPoint=6;
+    public AudioClip enemyDieSound;
+
+    AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,26 +68,37 @@ public class spartanKingDetectTarget : MonoBehaviour
     {
         myCharacter = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         targetEnemy = new Vector3(Enemy.position.x, Enemy.position.y, Enemy.position.z);
-        if (startChase == true)
+        if (spartanHealthPoint <= 0)
         {
-            if (Vector3.Distance(myCharacter, targetEnemy) > 15)
-            {
-                if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
-                {
-                    transform.LookAt(targetEnemy);
-                    agent.destination=targetEnemy;
-                }
-            }
-            changeAnimation();
-            if (Vector3.Distance(myCharacter, targetEnemy) >49)
-            {
-                if (particleOn == false)
-                {
-                    particleOn = true;
-                    StartCoroutine(wait1());
-                }
-            }
+            agent.isStopped = true;
+            anim.SetBool("isWalking", false);
+            anim.SetBool("isCharge", false);
+            anim.SetBool("isAttack", false);
 
+        }
+        else
+        {
+            if (startChase == true)
+            {
+                if (Vector3.Distance(myCharacter, targetEnemy) > 15)
+                {
+                    if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
+                    {
+                        transform.LookAt(targetEnemy);
+                        agent.destination = targetEnemy;
+                    }
+                }
+                changeAnimation();
+                if (Vector3.Distance(myCharacter, targetEnemy) > 49)
+                {
+                    if (particleOn == false)
+                    {
+                        particleOn = true;
+                        StartCoroutine(wait1());
+                    }
+                }
+
+            }
         }
     }
     void electronicCreate()
@@ -113,5 +129,36 @@ public class spartanKingDetectTarget : MonoBehaviour
 
             }
         }
+    }
+
+    void OnCollisionEnter(Collision colliderInfo)
+    {
+        if (spartanHealthPoint > 3)
+        {
+            if (colliderInfo.gameObject.tag == "fireball")
+            {
+                spartanHealthPoint--;
+                print("Damage");
+            }
+        }
+        else if(spartanHealthPoint <= 3&& spartanHealthPoint >0)
+        {
+            if (colliderInfo.gameObject.tag == "box")
+            {
+                spartanHealthPoint--;
+            }
+        }
+        else
+        {
+            anim.SetBool("isDie", true);
+            
+        }
+    }
+    IEnumerator dieTime()
+    {
+        yield return new WaitForSeconds(2);
+        audio.clip = enemyDieSound;
+        audio.Play();
+        Destroy(gameObject, 2);
     }
 }

@@ -29,6 +29,8 @@ TagManager:
   - LockedDoor
   - Flash
   - BigBox
+  - box
+  - fireball
   layers:
   - Default
   - TransparentFX
