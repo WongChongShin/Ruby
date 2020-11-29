@@ -6,6 +6,7 @@ public class BombBox : MonoBehaviour
 {
     bool hasExploded = false;
     public GameObject explosionEffect;
+    public GameObject bomb;
 
     // Start is called before the first frame update
     void Start()
@@ -14,13 +15,9 @@ public class BombBox : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void OnTriggerEnter(Collider collisionInfo)
     {
-        RaycastHit hit;
-
-        if (Physics.Raycast(transform.position, transform.forward, out hit, 2.0f) && hit.collider.gameObject.tag == "Player")
-        {
-                if (hit.collider.gameObject.tag == "Player")
+         if (collisionInfo.gameObject.tag == "Player")
                 {
                     Debug.Log("Boom!");
                     StartCoroutine(wait());
@@ -30,10 +27,8 @@ public class BombBox : MonoBehaviour
                 {
                     yield return new WaitForSeconds(1);
                     Instantiate(explosionEffect, transform.position, transform.rotation);
-                    Destroy(gameObject);
+                    Destroy(bomb);
                     hasExploded = true;
                 }
-            
-        }
     }
 }
