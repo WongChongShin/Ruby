@@ -45,4 +45,20 @@ public class UIManager : MonoBehaviour
         playBtnSound();
         Application.Quit();
     }
+
+    public void CreditBtnClicked()
+    {
+        levelToLoad = "RubyCredit";
+        playBtnSound();
+        StartCoroutine(Wait());
+        SceneManager.LoadScene(levelToLoad);
+    }
+
+    public void CreditExitBtnClicked()
+    {
+        levelToLoad = "RubyMainMenu";
+        playBtnSound();
+        StartCoroutine(Wait());
+        SceneManager.LoadScene(levelToLoad);
+    }
 }
