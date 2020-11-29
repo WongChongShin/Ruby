@@ -19,6 +19,8 @@ public class spartanKingDetectTarget : MonoBehaviour
     public Transform[] door;
     private int spartanHealthPoint=6;
     public AudioClip enemyDieSound;
+    private bool attack=false;
+    private CapsuleCollider collider;
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -27,8 +29,8 @@ public class spartanKingDetectTarget : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         GetComponent<NavMeshAgent>().speed = speed;
         anim = GetComponent<Animator>();
-        agent.autoBraking = false;
         moveSpartanKing = gameObject.GetComponent<spartanKingMove>();
+        collider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -42,22 +44,30 @@ public class spartanKingDetectTarget : MonoBehaviour
         
         if (Vector3.Distance(myCharacter, targetEnemy) <= 49 && Vector3.Distance(myCharacter, targetEnemy) > 0)
         {
-            agent.isStopped = true;
-            anim.SetBool("isWalking", false);
-            anim.SetBool("isCharge", false);
-            anim.SetBool("isAttack", true);
+            if (attack == false)
+            {
+                collider.radius = 20.0f;
+                agent.isStopped = true;
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isCharge", false);
+                anim.SetBool("isAttack", true);
+                attack = true;
+                StartCoroutine(attackTime());
+            }
+
         }
         else
         {
             if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
             {
+                collider.radius = 8.49f;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", true);
                 anim.SetBool("isAttack", false);
             }
             else
             {
-                
+                collider.radius = 8.49f;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", false);
                 anim.SetBool("isAttack", false);
@@ -71,7 +81,7 @@ public class spartanKingDetectTarget : MonoBehaviour
 
         if (startChase == true)
         {
-            if (Vector3.Distance(myCharacter, targetEnemy) > 5)
+            if (Vector3.Distance(myCharacter, targetEnemy) > 10)
             {
                 if (!electricalVolt.GetComponent<ParticleSystem>().isPlaying)
                 {
@@ -90,6 +100,7 @@ public class spartanKingDetectTarget : MonoBehaviour
             }
             if (spartanHealthPoint <= 0)
             {
+                collider.radius = 8.49f;
                 agent.isStopped = true;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", false);
@@ -160,5 +171,19 @@ public class spartanKingDetectTarget : MonoBehaviour
         audio.clip = enemyDieSound;
         audio.Play();
         Destroy(gameObject, 2);
+    }
+
+    IEnumerator attackTime()
+    {
+        yield return new WaitForSeconds(1);
+        agent.isStopped = true;
+        anim.SetBool("isAttack", false);
+        collider.radius = 8.49f;
+        StartCoroutine(idleTime());
+    }
+    IEnumerator idleTime()
+    {
+        yield return new WaitForSeconds(1);
+        attack = false;
     }
 }

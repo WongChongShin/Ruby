@@ -23,6 +23,7 @@ public class healthPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (health == 3)
         {
             img.texture = healthFull;

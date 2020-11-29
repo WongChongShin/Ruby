@@ -58,13 +58,13 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: r
+    positiveButton: mouse 1
     altNegativeButton: 
     altPositiveButton: mouse 1
     gravity: 1000
     dead: 0.001
-    sensitivity: 1000
-    snap: 0
+    sensitivity: 10000
+    snap: 1
     invert: 0
     type: 0
     axis: 0
@@ -560,7 +560,7 @@ InputManager:
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
-    snap: 0
+    snap: 1
     invert: 0
     type: 0
     axis: 5

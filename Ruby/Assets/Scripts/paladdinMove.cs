@@ -11,6 +11,7 @@ public class paladdinMove : MonoBehaviour
     public int speed;
     public Animator anim;
     private int number = 0;
+    private bool startMov = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,11 +38,15 @@ public class paladdinMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement();
+        if (startMov == true)
+        {
+            movement();
+        }
     }
     IEnumerator wait()
     {
         yield return new WaitForSeconds(5);
+        startMov = true;
         nextPoint();
     }
     public void movement()
@@ -53,11 +58,12 @@ public class paladdinMove : MonoBehaviour
             {
                 anim.SetBool("isObserve", true);
                 anim.SetBool("isWalk", false);
-                if (number < 1)
+                
+                if (startMov == true)
                 {
+                    startMov = false;
                     StartCoroutine(wait());
                 }
-                number++;
             }
 
         }
@@ -66,7 +72,6 @@ public class paladdinMove : MonoBehaviour
             anim.SetBool("isObserve", false);
             anim.SetBool("isWalk", true);
             agent.isStopped = false;
-            number = 0;
         }
     }
 }
