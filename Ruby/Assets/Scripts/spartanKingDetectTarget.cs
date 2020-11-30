@@ -46,7 +46,7 @@ public class spartanKingDetectTarget : MonoBehaviour
         {
             if (attack == false)
             {
-                collider.radius = 20.0f;
+                collider.radius = 30.0f;
                 agent.isStopped = true;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isCharge", false);

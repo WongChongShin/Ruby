@@ -130,7 +130,7 @@ public class paladinDetectTarget : MonoBehaviour
         yield return new WaitForSeconds(2);
         anim.SetBool("isAttack", false);
         anim.SetBool("isSlay", false);
-        collider.radius = 0.45f;
+        //collider.radius = 0.45f;
         StartCoroutine(wait3());
         
 
