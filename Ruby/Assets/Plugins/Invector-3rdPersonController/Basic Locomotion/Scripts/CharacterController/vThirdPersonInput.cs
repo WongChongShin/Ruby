@@ -9,7 +9,7 @@ namespace Invector.vCharacterController
         [System.Serializable]
         public class OnUpdateEvent : UnityEngine.Events.UnityEvent<vThirdPersonInput> { }
 
-        #region Variables        
+        #region Variables
 
         [vEditorToolbar("Inputs")]
         [Header("Default Input")]

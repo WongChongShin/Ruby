@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
-    //Ruby Die and collect coin declaration
-    private bool rubyIsDead = false;
-    public AudioClip rubyDieSound;   
+    //Ruby collect coin declaration 
     public AudioClip coinIsCollected;
     public Animator anim;
 
@@ -15,11 +13,6 @@ public class PlayerCollision : MonoBehaviour
     static public bool doorOpen = false;
     static public bool youNeedKey = false;
     
-    //Collide Bomb declare
-    public float delay = 1f;
-    float countDown;
-    bool hasExploded = false;
-    public GameObject explosionEffect;
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -27,9 +20,6 @@ public class PlayerCollision : MonoBehaviour
     {
         audio = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
-        
-        //Collide bomb starting assign
-        countDown = delay;
 
     }
 
@@ -41,13 +31,13 @@ public class PlayerCollision : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2.0f))
         {
             //Collide trap
-            if (hit.collider.gameObject.tag == "Trap" && rubyIsDead == false)
+            if (hit.collider.gameObject.tag == "Trap")
             {
                 Debug.Log("Game Over!");
-                rubyDead(rubyDieSound, true);
+                healthPoint.health -= 3;
             }
             //Collide locked door
-            else if (hit.collider.gameObject.tag == "LockedDoor" && rubyIsDead == false)
+            else if (hit.collider.gameObject.tag == "LockedDoor")
             {               
                 if (numOfKey > 0)
                 {
@@ -61,28 +51,14 @@ public class PlayerCollision : MonoBehaviour
                 }
             }
             //Collide big box
-            else if (hit.collider.gameObject.tag == "BigBox" && rubyIsDead == false)
+            else if (hit.collider.gameObject.tag == "BigBox")
             {
                 anim.SetBool("isPushing", true);
             }
-
-            //Collide Bomb
-
         }
     }
 
-
-    //Ruby dead event
-    void rubyDead(AudioClip rubyDieSound, bool checkDead)
-    {
-        anim.SetBool("isDead", true);
-        audio.clip = rubyDieSound;
-        audio.Play();      
-        rubyIsDead = checkDead;
-
-    }
-
-    //Ruby collect coin
+    //Ruby collect coin and key
     void OnTriggerEnter(Collider collisionInfo)
     {
         if (collisionInfo.gameObject.tag == "Coin")
