@@ -18,6 +18,8 @@ public class paladinDetectTarget : MonoBehaviour
     private CapsuleCollider collider;
     private bool attack = false;
     private bool detectAudio = false;
+    public GameObject detectUI;
+    private bool chasing = false;
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -37,7 +39,7 @@ public class paladinDetectTarget : MonoBehaviour
     }
     void changeAnimation()
     {
-        if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 31)
+        if (Vector3.Distance(myCharacter, targetEnemy) <= 100 && Vector3.Distance(myCharacter, targetEnemy) > 31)
         {
             collider.radius = 0.45f;
             agent.isStopped = false;
@@ -46,7 +48,7 @@ public class paladinDetectTarget : MonoBehaviour
             anim.SetBool("isSlay", false);
             anim.SetBool("isAttack", false);
         }
-        else if (Vector3.Distance(myCharacter, targetEnemy) <= 30 && Vector3.Distance(myCharacter, targetEnemy) > 17)
+        else if (Vector3.Distance(myCharacter, targetEnemy) <= 40 && Vector3.Distance(myCharacter, targetEnemy) > 21)
         {
             if (attack == false)
             {
@@ -60,7 +62,7 @@ public class paladinDetectTarget : MonoBehaviour
                 StartCoroutine(wait2());
             }
         }
-        else if (Vector3.Distance(myCharacter, targetEnemy) <= 16)
+        else if (Vector3.Distance(myCharacter, targetEnemy) <= 20)
         {
 
             if (attack == false)
@@ -92,23 +94,28 @@ public class paladinDetectTarget : MonoBehaviour
         {
             myCharacter = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             targetEnemy = new Vector3(Enemy.position.x, Enemy.position.y, Enemy.position.z);
-            if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 5)
+            if (Vector3.Distance(myCharacter, targetEnemy) <= 100 && Vector3.Distance(myCharacter, targetEnemy) > 5)
             {
                 agent.isStopped = false;
                 if (detectAudio == false)
                 {
+                    StartCoroutine(detectIcon());
                     detectAudio = true;
                     audio.clip = targetDetect;
                     audio.Play();
+                    
                 }
-                transform.LookAt(targetEnemy);
-                //transform.position += transform.forward * Time.deltaTime * speed;
-                agent.destination = targetEnemy;
-                (transform.GetComponent("paladdinMove") as MonoBehaviour).enabled = false;
-                changeAnimation();
+                if (chasing == true)
+                {
+                    transform.LookAt(targetEnemy);
+                    //transform.position += transform.forward * Time.deltaTime * speed;
+                    agent.destination = targetEnemy;
+                    (transform.GetComponent("paladdinMove") as MonoBehaviour).enabled = false;
+                    changeAnimation();
+                }
 
             }
-            else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
+            else if (Vector3.Distance(myCharacter, targetEnemy) > 100)
             {
                 detectAudio = false;
                 agent.isStopped = true;
@@ -151,4 +158,16 @@ public class paladinDetectTarget : MonoBehaviour
         yield return new WaitForSeconds(2);
         attack = false;
     }
+    IEnumerator detectIcon()
+    {
+        chasing = false;
+        agent.isStopped = true;
+        detectUI.SetActive(true);
+        yield return new WaitForSeconds(1);
+        detectUI.SetActive(false);
+        chasing = true;
+        agent.isStopped = false;
+    }
+
+    
 }
