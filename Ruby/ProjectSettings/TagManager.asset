@@ -33,6 +33,7 @@ TagManager:
   - fireball
   - sword
   - cannonBall
+  - explosion
   layers:
   - Default
   - TransparentFX

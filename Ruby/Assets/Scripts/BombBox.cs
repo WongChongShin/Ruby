@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BombBox : MonoBehaviour
 {
-    bool hasExploded = false;
     public GameObject explosionEffect;
     public GameObject bomb;
 
@@ -19,16 +18,15 @@ public class BombBox : MonoBehaviour
     {
         if (collisionInfo.gameObject.tag == "Player")
         {
-            Debug.Log("Boom!");
             StartCoroutine(wait());
         }
+    }
+    IEnumerator wait()
+    {
+        yield return new WaitForSeconds(1);
+        GameObject temp = Instantiate(explosionEffect, transform.position, transform.rotation);
+        Destroy(bomb);
+        Destroy(temp, 2);
 
-        IEnumerator wait()
-        {
-            yield return new WaitForSeconds(1);
-            Instantiate(explosionEffect, transform.position, transform.rotation);
-            Destroy(bomb);
-            hasExploded = true;
-        }
     }
 }
