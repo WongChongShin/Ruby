@@ -17,18 +17,18 @@ public class BombBox : MonoBehaviour
     // Update is called once per frame
     void OnTriggerEnter(Collider collisionInfo)
     {
-         if (collisionInfo.gameObject.tag == "Player")
-                {
-                    Debug.Log("Boom!");
-                    StartCoroutine(wait());
-                }
+        if (collisionInfo.gameObject.tag == "Player")
+        {
+            Debug.Log("Boom!");
+            StartCoroutine(wait());
+        }
 
-                IEnumerator wait()
-                {
-                    yield return new WaitForSeconds(1);
-                    Instantiate(explosionEffect, transform.position, transform.rotation);
-                    Destroy(bomb);
-                    hasExploded = true;
-                }
+        IEnumerator wait()
+        {
+            yield return new WaitForSeconds(1);
+            Instantiate(explosionEffect, transform.position, transform.rotation);
+            Destroy(bomb);
+            hasExploded = true;
+        }
     }
 }
