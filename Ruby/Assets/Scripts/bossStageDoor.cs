@@ -9,7 +9,7 @@ public class bossStageDoor : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -32,6 +32,10 @@ public class bossStageDoor : MonoBehaviour
                     if (door[i].position.y < 70)
                     {
                         door[i].position += new Vector3(0, 15 * Time.deltaTime, 0);
+                    }
+                    else
+                    {
+                        door[i].gameObject.tag = "Untagged";
                     }
                 }
             }

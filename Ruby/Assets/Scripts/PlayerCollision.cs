@@ -33,15 +33,13 @@ public class PlayerCollision : MonoBehaviour
             //Collide trap
             if (hit.collider.gameObject.tag == "Trap")
             {
-                Debug.Log("Game Over!");
-                healthPoint.health -= 3;
+                healthPoint.health =0;
             }
             //Collide locked door
             else if (hit.collider.gameObject.tag == "LockedDoor")
             {               
                 if (numOfKey > 0)
                 {
-                    Debug.Log("Opening!");
                     doorOpen = true;
                    
                 }

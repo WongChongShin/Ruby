@@ -13,9 +13,11 @@ public class paladinDetectTarget : MonoBehaviour
     private Vector3 targetEnemy;
     private NavMeshAgent agent;
     private bool die = false;
+    public AudioClip targetDetect;
     public AudioClip enemyDieSound;
     private CapsuleCollider collider;
-    private bool attack=false;
+    private bool attack = false;
+    private bool detectAudio = false;
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -25,7 +27,7 @@ public class paladinDetectTarget : MonoBehaviour
         anim = GetComponent<Animator>();
         movePaladdin = gameObject.GetComponent<paladdinMove>();
         audio = GetComponent<AudioSource>();
-        collider= GetComponent<CapsuleCollider>();
+        collider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -84,14 +86,21 @@ public class paladinDetectTarget : MonoBehaviour
             anim.SetBool("isSlay", false);
             anim.SetBool("isAttack", false);
             anim.SetBool("isObserve", false);
-            
+
         }
         else
         {
             myCharacter = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             targetEnemy = new Vector3(Enemy.position.x, Enemy.position.y, Enemy.position.z);
-            if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) >5)
+            if (Vector3.Distance(myCharacter, targetEnemy) <= 70 && Vector3.Distance(myCharacter, targetEnemy) > 5)
             {
+                agent.isStopped = false;
+                if (detectAudio == false)
+                {
+                    detectAudio = true;
+                    audio.clip = targetDetect;
+                    audio.Play();
+                }
                 transform.LookAt(targetEnemy);
                 //transform.position += transform.forward * Time.deltaTime * speed;
                 agent.destination = targetEnemy;
@@ -101,6 +110,8 @@ public class paladinDetectTarget : MonoBehaviour
             }
             else if (Vector3.Distance(myCharacter, targetEnemy) > 70)
             {
+                detectAudio = false;
+                agent.isStopped = true;
                 collider.radius = 0.45f;
                 (transform.GetComponent("paladdinMove") as MonoBehaviour).enabled = true;
                 movePaladdin.movement();
@@ -109,7 +120,7 @@ public class paladinDetectTarget : MonoBehaviour
     }
     void OnTriggerEnter(Collider collisionInfo)
     {
-        if (collisionInfo.gameObject.tag == "box"|| collisionInfo.gameObject.tag == "explosion")
+        if (collisionInfo.gameObject.tag == "box" || collisionInfo.gameObject.tag == "explosion")
         {
             anim.SetBool("isDie", true);
             die = true;
@@ -132,7 +143,7 @@ public class paladinDetectTarget : MonoBehaviour
         anim.SetBool("isSlay", false);
         //collider.radius = 0.45f;
         StartCoroutine(wait3());
-        
+
 
     }
     IEnumerator wait3()
