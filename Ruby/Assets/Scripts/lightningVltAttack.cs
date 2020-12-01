@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class lightningVltAttack : MonoBehaviour
 {
+    private bool collide=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,16 +16,21 @@ public class lightningVltAttack : MonoBehaviour
     {
         
     }
-    void OnCollisionEnter(Collision colliderInfo)
+    void OnParticleCollision(GameObject colliderInfo)
     {
-        if (colliderInfo.gameObject.tag == "Player")
+        if (colliderInfo.tag == "Player")
         {
+            if (collide == false)
+            {
                 StartCoroutine(wait());
+            }
         }
     }
     IEnumerator wait()
     {
-        yield return new WaitForSeconds(1);
+        collide = true;
+        yield return new WaitForSeconds(1.5f);
         healthPoint.health -= 1;
+        collide = false;
     }
 }
