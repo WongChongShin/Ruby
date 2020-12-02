@@ -9,6 +9,7 @@ public class changePower : MonoBehaviour
     private bool startPower = false;
     private bool displayPower = false;
     public Transform[] door;
+    public GameObject[] ball;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,9 @@ public class changePower : MonoBehaviour
     {
         power[powerNum].GetComponent<ParticleSystem>().Play();
         yield return new WaitForSeconds(10);
+        Instantiate(ball[powerNum], transform.position, transform.rotation);
         power[powerNum].GetComponent<ParticleSystem>().Stop();
+        
         powerNum++;
         if (powerNum > 2)
         {

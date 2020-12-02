@@ -178,7 +178,6 @@ public class spartanKingDetectTarget : MonoBehaviour
         yield return new WaitForSeconds(1);
         agent.isStopped = true;
         anim.SetBool("isAttack", false);
-        collider.radius = 8.49f;
         StartCoroutine(idleTime());
     }
     IEnumerator idleTime()
