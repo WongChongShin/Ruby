@@ -70,11 +70,34 @@ public class PlayerCollision : MonoBehaviour
 
         else if (collisionInfo.gameObject.tag == "Key")
         {
-            Debug.Log("Key get!");
             audio.clip = coinIsCollected;
             audio.Play();
             numOfKey++;
             Destroy(collisionInfo.gameObject);
+        }
+        else if (collisionInfo.gameObject.tag == "blueball")
+        {
+            audio.clip = coinIsCollected;
+            audio.Play();
+            ballCollect.numBlueBall++;
+            Destroy(collisionInfo.gameObject);
+            ballCollect.textOn = true;
+        }
+        else if (collisionInfo.gameObject.tag == "greenball")
+        {
+            audio.clip = coinIsCollected;
+            audio.Play();
+            ballCollect.numGreenBall++;
+            Destroy(collisionInfo.gameObject);
+            ballCollect.textOn = true;
+        }
+        else if (collisionInfo.gameObject.tag == "redball")
+        {
+            audio.clip = coinIsCollected;
+            audio.Play();
+            ballCollect.numRedBall++;
+            Destroy(collisionInfo.gameObject);
+            ballCollect.textOn = true;
         }
     }
 }
