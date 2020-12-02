@@ -10,6 +10,7 @@ public class changePower : MonoBehaviour
     private bool displayPower = false;
     public Transform[] door;
     public GameObject[] ball;
+    public int changePowerTime=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class changePower : MonoBehaviour
     IEnumerator wait()
     {
         power[powerNum].GetComponent<ParticleSystem>().Play();
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(changePowerTime);
         Instantiate(ball[powerNum], transform.position, transform.rotation);
         power[powerNum].GetComponent<ParticleSystem>().Stop();
 

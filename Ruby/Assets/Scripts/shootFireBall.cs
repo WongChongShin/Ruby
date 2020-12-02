@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class shootFireBall : MonoBehaviour
 {
     public GameObject[] powerball;
-    private GameObject tempPowerBall;
     private int change = 0;
     public Transform player;
     public GameObject aimUI;
@@ -18,17 +17,22 @@ public class shootFireBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tempPowerBall.GetComponent<ParticleSystem>().Play();
+        for (int i = 0; i < 2; i++)
+        {
+            powerball[i].GetComponent<ParticleSystem>().Play();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         if (aim ==true)
         {
             controlCannon();
-            shoot();
+            changePowerBall();
         }
+        
     }
 
     void OnTriggerEnter(Collider collisionInfo)
@@ -70,41 +74,93 @@ public class shootFireBall : MonoBehaviour
 
     void changePowerBall()
     {
-        if (Input.GetButtonDown("change ball"))
+        if (Input.GetButtonDown("changeball"))
         {
             change++;
             if (change > 2)
             {
                 change = 0;
             }
-            tempPowerBall = powerball[change];
-            
         }
-        shoot();
-    }
-    void shoot()
-    {
         if (checkAim == true)
         {
             if (Input.GetButtonDown("shoot"))
             {
-                if (change > 0)
+                if (change == 0)
                 {
-                    Vector3 createPosition = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
-                    GameObject temp = Instantiate(tempPowerBall, createPosition, transform.rotation);
-                    temp.SetActive(true);
-
-                    if (temp.GetComponent<Rigidbody>() == null)
-                    {
-                        temp.AddComponent<Rigidbody>();
-                    }
-                    temp.AddComponent<destroyFireBall>();
-                    Rigidbody rb = temp.GetComponent<Rigidbody>();
-                    rb.velocity = tempPowerBall.transform.TransformDirection(new Vector3(0, 0, throwForce));
-                    temp.GetComponent<SphereCollider>().enabled = true;
-                    if (tempPowerBall) ;
+                    green_power_ball();
+                }
+                else if (change == 1)
+                {
+                    red_power_ball();
+                }
+                else if (change == 2)
+                {
+                    blue_power_ball();
                 }
             }
         }
+    }
+    void green_power_ball()
+    {
+        if (greenBallCollect.numGreenBall > 0)
+        {
+            Vector3 createPosition = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
+            GameObject temp = Instantiate(powerball[0], createPosition, transform.rotation);
+            temp.SetActive(true);
+
+            if (temp.GetComponent<Rigidbody>() == null)
+            {
+                temp.AddComponent<Rigidbody>();
+            }
+            temp.AddComponent<destroyFireBall>();
+            Rigidbody rb = temp.GetComponent<Rigidbody>();
+            rb.velocity = powerball[0].transform.TransformDirection(new Vector3(0, 0, throwForce));
+            temp.GetComponent<SphereCollider>().enabled = true;
+            greenBallCollect.numGreenBall--;
+            greenBallCollect.textOn = true;
+        }
+    }
+
+    void red_power_ball()
+    {
+        if (redBallCollect.numRedBall > 0)
+        {
+            Vector3 createPosition = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
+            GameObject temp = Instantiate(powerball[2], createPosition, transform.rotation);
+            temp.SetActive(true);
+
+            if (temp.GetComponent<Rigidbody>() == null)
+            {
+                temp.AddComponent<Rigidbody>();
+            }
+            temp.AddComponent<destroyFireBall>();
+            Rigidbody rb = temp.GetComponent<Rigidbody>();
+            rb.velocity = powerball[2].transform.TransformDirection(new Vector3(0, 0, throwForce));
+            temp.GetComponent<SphereCollider>().enabled = true;
+            redBallCollect.numRedBall--;
+            redBallCollect.textOn = true;
+        }
+    }
+    void blue_power_ball()
+    {
+        if (blueBallCollect.numBlueBall > 0)
+        {
+            Vector3 createPosition = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
+            GameObject temp = Instantiate(powerball[1], createPosition, transform.rotation);
+            temp.SetActive(true);
+
+            if (temp.GetComponent<Rigidbody>() == null)
+            {
+                temp.AddComponent<Rigidbody>();
+            }
+            temp.AddComponent<destroyFireBall>();
+            Rigidbody rb = temp.GetComponent<Rigidbody>();
+            rb.velocity = powerball[1].transform.TransformDirection(new Vector3(0, 0, throwForce));
+            temp.GetComponent<SphereCollider>().enabled = true;
+            blueBallCollect.numBlueBall--;
+            blueBallCollect.textOn = true;
+        }
+
     }
 }

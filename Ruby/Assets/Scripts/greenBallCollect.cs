@@ -24,6 +24,7 @@ public class greenBallCollect : MonoBehaviour
             if (numGreenBall >= 0)
             {
                 totalGreenBall.text = "x" + numGreenBall.ToString();
+                textOn = false;
             }
         }
     }
