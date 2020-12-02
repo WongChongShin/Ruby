@@ -24,6 +24,7 @@ public class redBallCollect : MonoBehaviour
             if (numRedBall >= 0)
             {
                 totalRedBall.text = "x" + numRedBall.ToString();
+                textOn = false;
             }
         }
     }

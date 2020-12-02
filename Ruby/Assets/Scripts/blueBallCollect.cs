@@ -26,6 +26,7 @@ public class blueBallCollect : MonoBehaviour
             if (numBlueBall >= 0)
             {
                 totalBlueBall.text = "x" + numBlueBall.ToString();
+                textOn = false;
             }
 
         }
