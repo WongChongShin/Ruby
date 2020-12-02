@@ -32,8 +32,10 @@ TagManager:
   - box
   - fireball
   - sword
-  - cannonBall
   - explosion
+  - blueball
+  - redball
+  - greenball
   layers:
   - Default
   - TransparentFX

@@ -27,15 +27,13 @@ public class bossStageDoor : MonoBehaviour
         {
             if (triggerDoor == true)
             {
+                
                 for (int i = 0; i < door.Length; i++)
                 {
+                    door[i].gameObject.tag = "Untagged";
                     if (door[i].position.y < 70)
                     {
                         door[i].position += new Vector3(0, 15 * Time.deltaTime, 0);
-                    }
-                    else
-                    {
-                        door[i].gameObject.tag = "Untagged";
                     }
                 }
             }
