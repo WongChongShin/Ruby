@@ -79,25 +79,43 @@ public class PlayerCollision : MonoBehaviour
         {
             audio.clip = coinIsCollected;
             audio.Play();
+
             blueBallCollect.numBlueBall++;
             Destroy(collisionInfo.gameObject);
             blueBallCollect.textOn = true;
+
+            ballCollect.numBlueBall++;
+            Destroy(collisionInfo.gameObject);
+            ballCollect.textOn = true;
+
         }
         else if (collisionInfo.gameObject.tag == "greenball")
         {
             audio.clip = coinIsCollected;
             audio.Play();
+
             greenBallCollect.numGreenBall++;
             Destroy(collisionInfo.gameObject);
             greenBallCollect.textOn = true;
+
+            ballCollect.numGreenBall++;
+            Destroy(collisionInfo.gameObject);
+            ballCollect.textOn = true;
+
         }
         else if (collisionInfo.gameObject.tag == "redball")
         {
             audio.clip = coinIsCollected;
             audio.Play();
+
             redBallCollect.numRedBall++;
             Destroy(collisionInfo.gameObject);
             redBallCollect.textOn = true;
+
+            ballCollect.numRedBall++;
+            Destroy(collisionInfo.gameObject);
+            ballCollect.textOn = true;
+
         }
     }
 }
