@@ -5,6 +5,7 @@ using UnityEngine;
 public class spartanKingAttack : MonoBehaviour
 {
     public Animator anim;
+    private bool collide = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,17 +15,20 @@ public class spartanKingAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    void OnCollisionEnter(Collision colliderInfo)
+    void OnCollisionStay(Collision colliderInfo)
     {
         if (colliderInfo.gameObject.tag == "Player")
         {
-            if (anim.GetBool("isAttack") == true)
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack"))
             {
-                StartCoroutine(wait());
+                if (collide == true)
+                {
+                    collide = false;
+                    StartCoroutine(wait());
+                }
             }
-
         }
     }
     IEnumerator wait()

@@ -17,9 +17,9 @@ public class spartanKingDetectTarget : MonoBehaviour
     private bool particleOn = false;
     private bool startChase = false;
     public Transform[] door;
-    private int spartanHealthPoint=6;
+    private int spartanHealthPoint = 6;
     public AudioClip enemyDieSound;
-    private bool attack=false;
+    private bool attack = false;
     private CapsuleCollider collider;
 
     AudioSource audio;
@@ -41,7 +41,7 @@ public class spartanKingDetectTarget : MonoBehaviour
     }
     void changeAnimation()
     {
-        
+
         if (Vector3.Distance(myCharacter, targetEnemy) <= 49 && Vector3.Distance(myCharacter, targetEnemy) > 0)
         {
             if (attack == false)
@@ -152,7 +152,7 @@ public class spartanKingDetectTarget : MonoBehaviour
                 print("Damage");
             }
         }
-        else if(spartanHealthPoint <= 3&& spartanHealthPoint >0)
+        else if (spartanHealthPoint <= 3 && spartanHealthPoint > 0)
         {
             if (colliderInfo.gameObject.tag == "box")
             {
@@ -162,7 +162,7 @@ public class spartanKingDetectTarget : MonoBehaviour
         else
         {
             anim.SetBool("isDie", true);
-            
+
         }
     }
     IEnumerator dieTime()
@@ -178,7 +178,6 @@ public class spartanKingDetectTarget : MonoBehaviour
         yield return new WaitForSeconds(1);
         agent.isStopped = true;
         anim.SetBool("isAttack", false);
-        collider.radius = 8.49f;
         StartCoroutine(idleTime());
     }
     IEnumerator idleTime()
