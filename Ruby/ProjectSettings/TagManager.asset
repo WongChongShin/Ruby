@@ -36,6 +36,9 @@ TagManager:
   - blueball
   - redball
   - greenball
+  - greenPowerball
+  - bluePowerball
+  - redPowerball
   layers:
   - Default
   - TransparentFX
