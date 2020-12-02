@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class shootFireBall : MonoBehaviour
 {
-    public GameObject fireball;
+    public GameObject[] powerball;
+    private GameObject tempPowerBall;
+    private int change = 0;
     public Transform player;
     public GameObject aimUI;
     public GameObject firstPersonCamera;
@@ -16,7 +18,7 @@ public class shootFireBall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        fireball.GetComponent<ParticleSystem>().Play();
+        tempPowerBall.GetComponent<ParticleSystem>().Play();
     }
 
     // Update is called once per frame
@@ -65,24 +67,43 @@ public class shootFireBall : MonoBehaviour
             }
         }
     }
+
+    void changePowerBall()
+    {
+        if (Input.GetButtonDown("change ball"))
+        {
+            change++;
+            if (change > 2)
+            {
+                change = 0;
+            }
+            tempPowerBall = powerball[change];
+            
+        }
+        shoot();
+    }
     void shoot()
     {
         if (checkAim == true)
         {
             if (Input.GetButtonDown("shoot"))
             {
-                Vector3 createPosition = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
-                GameObject temp = Instantiate(fireball, createPosition, transform.rotation);
-                temp.SetActive(true);
-
-                if (temp.GetComponent<Rigidbody>() == null)
+                if (change > 0)
                 {
-                    temp.AddComponent<Rigidbody>();
+                    Vector3 createPosition = new Vector3(transform.position.x, transform.position.y + 10, transform.position.z);
+                    GameObject temp = Instantiate(tempPowerBall, createPosition, transform.rotation);
+                    temp.SetActive(true);
+
+                    if (temp.GetComponent<Rigidbody>() == null)
+                    {
+                        temp.AddComponent<Rigidbody>();
+                    }
+                    temp.AddComponent<destroyFireBall>();
+                    Rigidbody rb = temp.GetComponent<Rigidbody>();
+                    rb.velocity = tempPowerBall.transform.TransformDirection(new Vector3(0, 0, throwForce));
+                    temp.GetComponent<SphereCollider>().enabled = true;
+                    if (tempPowerBall) ;
                 }
-                temp.AddComponent<destroyFireBall>();
-                Rigidbody rb = temp.GetComponent<Rigidbody>();
-                rb.velocity = fireball.transform.TransformDirection(new Vector3(0, 0, throwForce));
-                temp.GetComponent<SphereCollider>().enabled = true;
             }
         }
     }
