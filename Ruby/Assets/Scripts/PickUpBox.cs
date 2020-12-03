@@ -25,7 +25,7 @@ public class PickUpBox : MonoBehaviour
     {
         if (carrying == false && collidePlayer == true)
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetButtonDown("Pick Up"))
             {
                 pickup();
                 collider.enabled = false;
@@ -53,7 +53,7 @@ public class PickUpBox : MonoBehaviour
                 rbItem.velocity = item.transform.TransformDirection(new Vector3(0, 0, ThrowForce));
                 Destroy(item, 3);
             }
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetButtonDown("Pick Up"))
             {
                 drop();
                 carrying = false;
