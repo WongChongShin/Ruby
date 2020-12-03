@@ -369,6 +369,5 @@ namespace Invector.vCharacterController
         }
 
         #endregion
-
     }
 }

@@ -12,6 +12,7 @@ public class paladdinMove : MonoBehaviour
     public Animator anim;
     private int number = 0;
     private bool startMov = true;
+    private int tempSpeed;
     // Start is called before the first frame update
     void Start()
     {
@@ -72,6 +73,35 @@ public class paladdinMove : MonoBehaviour
             anim.SetBool("isObserve", false);
             anim.SetBool("isWalk", true);
             agent.isStopped = false;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "box")
+        {
+            anim.SetBool("isDie", true);
+            anim.SetBool("isWalk", false);
+            agent.isStopped = true;
+            tempSpeed = speed;
+            agent.speed = 0;
+            StartCoroutine(wait2());
+        }
+
+        IEnumerator wait2()
+        {
+            yield return new WaitForSeconds(5f);
+            anim.SetBool("isDie", false);
+            anim.SetBool("isWalk", true);
+            agent.isStopped = false;
+            StartCoroutine(wait3());
+        }
+
+        IEnumerator wait3()
+        {
+            yield return new WaitForSeconds(1f);
+            speed = tempSpeed;
+            agent.speed = speed;
         }
     }
 }

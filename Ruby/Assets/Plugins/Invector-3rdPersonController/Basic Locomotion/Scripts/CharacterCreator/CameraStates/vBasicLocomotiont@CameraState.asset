@@ -17,10 +17,10 @@ MonoBehaviour:
   - Name: Default
     forward: -1
     right: 0
-    defaultDistance: 40
+    defaultDistance: 70
     maxDistance: 80
     minDistance: 0.6
-    height: 30
+    height: 35
     smooth: 10
     smoothDamp: 4
     xMouseSensitivity: 3
@@ -32,7 +32,7 @@ MonoBehaviour:
     rotationOffSet: {x: 0.84, y: 0.99, z: 0}
     cullingHeight: 1.8
     cullingMinDist: 0.01
-    fov: 56
+    fov: 50
     useZoom: 0
     fixedAngle: {x: 360, y: 78}
     lookPoints:
