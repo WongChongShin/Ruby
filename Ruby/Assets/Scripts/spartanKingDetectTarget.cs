@@ -18,7 +18,7 @@ public class spartanKingDetectTarget : MonoBehaviour
     private bool particleOn = false;
     private bool startChase = false;
     public Transform[] door;
-    private int spartanHealthPoint = 20;
+    private int spartanHealthPoint = 12;
     public AudioClip enemyDieSound;
     private bool attack = false;
     private CapsuleCollider collider;
@@ -189,7 +189,14 @@ public class spartanKingDetectTarget : MonoBehaviour
         else
         {
             anim.SetBool("isDie", true);
+            StartCoroutine(win());
 
+            IEnumerator win()
+            {
+                yield return new WaitForSeconds(2);
+                levelToLoad = "WinScene";
+                SceneManager.LoadScene(levelToLoad);
+            }
         }
     }
     IEnumerator dieTime()
@@ -198,14 +205,7 @@ public class spartanKingDetectTarget : MonoBehaviour
         audio.clip = enemyDieSound;
         audio.Play();
         Destroy(gameObject, 2);
-        StartCoroutine(win());
-
-        IEnumerator win()
-        {
-            yield return new WaitForSeconds(2);
-            levelToLoad = "WinScene";
-            SceneManager.LoadScene(levelToLoad);
-        }
+       
     }
 
     IEnumerator attackTime()
