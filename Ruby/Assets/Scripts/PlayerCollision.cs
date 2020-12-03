@@ -53,6 +53,7 @@ public class PlayerCollision : MonoBehaviour
             {
                 anim.SetBool("isPushing", true);
             }
+            
         }
     }
 
@@ -116,6 +117,10 @@ public class PlayerCollision : MonoBehaviour
             Destroy(collisionInfo.gameObject);
             ballCollect.textOn = true;
 
+        }
+        else if (collisionInfo.gameObject.tag == "explosion")
+        {
+            healthPoint.health--;
         }
     }
 }
