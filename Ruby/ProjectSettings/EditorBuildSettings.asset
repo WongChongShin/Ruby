@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoseScene.unity
     guid: 713a818e675c80245ac483b7aa654b1c
+  - enabled: 1
+    path: Assets/Scenes/BossCutScene.unity
+    guid: 01d57245fab39a24a8da7da32241ec2f
   m_configObjects: {}

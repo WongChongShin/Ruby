@@ -6,6 +6,7 @@ public class bossStageDoor : MonoBehaviour
 {
     public Transform[] door;
     private bool triggerDoor = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +35,11 @@ public class bossStageDoor : MonoBehaviour
                     if (door[i].position.y < 70)
                     {
                         door[i].position += new Vector3(0, 15 * Time.deltaTime, 0);
+
+                        if (door[i].position.y >= 70)
+                        {
+                            BossCutScene.changeScene = true;
+                        }
                     }
                 }
             }

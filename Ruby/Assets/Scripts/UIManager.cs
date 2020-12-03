@@ -70,8 +70,7 @@ public class UIManager : MonoBehaviour
     {
         levelToLoad = "RubyChapter1Level1";
         StartCoroutine(Wait());
-        healthPoint.health += 3;
-        playerDie.die = false;
+        //playerDie.die = false;
         SceneManager.LoadScene(levelToLoad);
     }
 
