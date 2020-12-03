@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class spartanKingDetectTarget : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class spartanKingDetectTarget : MonoBehaviour
     private CapsuleCollider collider;
     public Slider mainSlider;
     private float minusHealthBar = 1.00f;
+    private string levelToLoad;
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -196,6 +198,14 @@ public class spartanKingDetectTarget : MonoBehaviour
         audio.clip = enemyDieSound;
         audio.Play();
         Destroy(gameObject, 2);
+        StartCoroutine(win());
+
+        IEnumerator win()
+        {
+            yield return new WaitForSeconds(2);
+            levelToLoad = "WinScene";
+            SceneManager.LoadScene(levelToLoad);
+        }
     }
 
     IEnumerator attackTime()
