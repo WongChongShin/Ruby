@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     private string levelToLoad;
     public AudioClip beep;
 
+    public static bool closeUserGuide = false;
+
     AudioSource audio;
 
     // Start is called before the first frame update
@@ -68,5 +70,10 @@ public class UIManager : MonoBehaviour
         levelToLoad = "RubyChapter1Level1";
         StartCoroutine(Wait());
         SceneManager.LoadScene(levelToLoad);
+    }
+
+    public void CloseUserGuide()
+    {
+        closeUserGuide = true;
     }
 }
