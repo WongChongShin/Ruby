@@ -17,8 +17,8 @@ public class collidePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
+
     void OnCollisionStay(Collision colliderInfo)
     {
         if (colliderInfo.gameObject.tag == "Player")
@@ -45,7 +45,7 @@ public class collidePlayer : MonoBehaviour
 
                 if (slowMotionPeriod == true)
                 {
-                    timeManager.DoSlow();
+                    Time.timeScale = 0.1f;
                     StartCoroutine(wait3());
                 }
             }
