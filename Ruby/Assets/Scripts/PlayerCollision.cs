@@ -12,7 +12,7 @@ public class PlayerCollision : MonoBehaviour
     public int numOfKey = 0;
     static public bool doorOpen = false;
     static public bool youNeedKey = false;
-    
+
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -31,17 +31,14 @@ public class PlayerCollision : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out hit, 2.0f))
         {
             //Collide trap
-            if (hit.collider.gameObject.tag == "Trap")
-            {
-                healthPoint.health =0;
-            }
+
             //Collide locked door
-            else if (hit.collider.gameObject.tag == "LockedDoor")
-            {               
+            if (hit.collider.gameObject.tag == "LockedDoor")
+            {
                 if (numOfKey > 0)
                 {
                     doorOpen = true;
-                   
+
                 }
                 else
                 {
@@ -53,7 +50,7 @@ public class PlayerCollision : MonoBehaviour
             {
                 anim.SetBool("isPushing", true);
             }
-            
+
         }
     }
 
@@ -121,6 +118,10 @@ public class PlayerCollision : MonoBehaviour
         else if (collisionInfo.gameObject.tag == "explosion")
         {
             healthPoint.health--;
+        }
+        else if (collisionInfo.gameObject.tag == "Trap")
+        {
+            healthPoint.health = 0;
         }
     }
 }
