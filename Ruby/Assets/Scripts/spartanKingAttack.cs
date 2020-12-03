@@ -21,7 +21,7 @@ public class spartanKingAttack : MonoBehaviour
     {
         if (colliderInfo.gameObject.tag == "Player")
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("attack") && RubyDodge.isDodge == false)
             {
                 if (collide == true)
                 {
@@ -33,7 +33,8 @@ public class spartanKingAttack : MonoBehaviour
     }
     IEnumerator wait()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         healthPoint.health -= 1;
+        collide = true;
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class spartanKingDetectTarget : MonoBehaviour
 {
@@ -13,14 +14,15 @@ public class spartanKingDetectTarget : MonoBehaviour
     private Vector3 targetEnemy;
     private NavMeshAgent agent;
     public GameObject electricalVolt;
-    public GameObject fireball;
     private bool particleOn = false;
     private bool startChase = false;
     public Transform[] door;
-    private int spartanHealthPoint = 6;
+    private int spartanHealthPoint = 20;
     public AudioClip enemyDieSound;
     private bool attack = false;
     private CapsuleCollider collider;
+    public Slider mainSlider;
+    private float minusHealthBar = 1.00f;
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -31,6 +33,7 @@ public class spartanKingDetectTarget : MonoBehaviour
         anim = GetComponent<Animator>();
         moveSpartanKing = gameObject.GetComponent<spartanKingMove>();
         collider = GetComponent<CapsuleCollider>();
+        mainSlider = GameObject.Find("SpartanKingHealth").GetComponent<Slider>();
     }
 
     // Update is called once per frame
@@ -144,20 +147,42 @@ public class spartanKingDetectTarget : MonoBehaviour
 
     void OnCollisionEnter(Collision colliderInfo)
     {
-        if (spartanHealthPoint > 3)
+        if (spartanHealthPoint > 0)
         {
-            if (colliderInfo.gameObject.tag == "fireball")
+            if (changePower.powerNum == 0)//green
             {
-                spartanHealthPoint--;
-                print("Damage");
+                if (colliderInfo.gameObject.tag == "redPowerball")
+                {
+                    spartanHealthPoint--;
+                    minusHealthBar -= 0.05f;
+                    mainSlider.value = minusHealthBar;
+                    print("Damage");
+                }
+                
             }
-        }
-        else if (spartanHealthPoint <= 3 && spartanHealthPoint > 0)
-        {
-            if (colliderInfo.gameObject.tag == "box")
+            else if (changePower.powerNum == 1)//blue
             {
-                spartanHealthPoint--;
+                if (colliderInfo.gameObject.tag == "greenPowerball")
+                {
+
+                    spartanHealthPoint--;
+                    minusHealthBar -= 0.05f;
+                    mainSlider.value = minusHealthBar;
+                    print("Damage");
+                }
             }
+            else if (changePower.powerNum == 2)//red
+            {
+                if (colliderInfo.gameObject.tag == "bluePowerball")
+                {
+                    spartanHealthPoint--;
+                    minusHealthBar -= 0.05f;
+                    mainSlider.value = minusHealthBar;
+                    print("Damage");
+                }
+                
+            }
+
         }
         else
         {

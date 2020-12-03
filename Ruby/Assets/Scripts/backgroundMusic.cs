@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class backgroundMusic : MonoBehaviour
 {
+    public Transform[] door;
     public AudioClip BackGroundMusic1;
     public AudioClip BackGroundMusic2;
+    private bool startMusic=false;
     AudioSource audio1;
     AudioSource audio2;
     // Start is called before the first frame update
@@ -23,6 +25,29 @@ public class backgroundMusic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        getDoorPosition();
+    }
+    void getDoorPosition()
+    {
+        for (int i = 0; i < door.Length; i++)
+        {
+            if (door[i].position.y > 70)
+            {
+                if (startMusic == false)
+                {
+                    startMusic = true;
+                    if (audio1.isPlaying)
+                    {
+                        audio1.Stop();
+                    }
+                    if (!audio2.isPlaying)
+                    {
+                        StartCoroutine(wait());
+                    }
+                }
+
+            }
+        }
     }
     void OnTriggerEnter(Collider collisionInfo)
     {
@@ -30,18 +55,7 @@ public class backgroundMusic : MonoBehaviour
         if (collisionInfo.gameObject.tag == "bossDoor")
         {
 
-            if (audio1.isPlaying)
-            {
-                audio1.Stop();
-            }
-            else if (!audio2.isPlaying)
-            {
-                StartCoroutine(wait());
-            }
-            else
-            {
-                return;
-            }
+           
             
         }
     }

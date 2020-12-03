@@ -6,6 +6,7 @@ public class activateUI : MonoBehaviour
 {
     public GameObject[] powerBall;
     public Transform[] door;
+    public GameObject[] BossHealth;
     private bool activeUI=false;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +23,10 @@ public class activateUI : MonoBehaviour
             for (int i = 0; i < 6; i++)
             {
                 powerBall[i].SetActive(true);
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                BossHealth[i].SetActive(true);
             }
         }
     }
