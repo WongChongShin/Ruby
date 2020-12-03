@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 public class BossCutScene : MonoBehaviour
 {
     private string levelToLoad;
-    private bool changeScene = false;
+    private bool changeDialog = false;
     public Transform[] door;
     private bool notReadDoor = false;
+    public GameObject bossDialog;
+    public GameObject enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -23,17 +25,14 @@ public class BossCutScene : MonoBehaviour
         {
             getDoorPosition();
         }
-        if (changeScene == true)
+        if (changeDialog == true)
         {
-            changeScene = false;
-            levelToLoad = "BossCutScene";
+            changeDialog = false;
+            bossDialog.SetActive(true);
+            Vector3 temp = new Vector3(556.3f, 54.6f, 478f);
+            enemy.transform.position = temp;
             StartCoroutine(Wait());
         }
-    }
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(1.0f);
-        SceneManager.LoadScene(levelToLoad);
     }
     void getDoorPosition()
     {
@@ -41,10 +40,17 @@ public class BossCutScene : MonoBehaviour
         {
             if (door[i].position.y > 40)
             {
-                changeScene = true;
+                changeDialog = true;
                 notReadDoor = true;
 
             }
         }
     }
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(15f);
+        bossDialog.SetActive(false);
+        changeDialog = false;
+    }
+    
 }

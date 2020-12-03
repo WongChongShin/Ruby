@@ -48,16 +48,5 @@ public class bossStageDoor : MonoBehaviour
         {
             triggerDoor = true;
         }
-        //if (collisionInfo.gameObject.tag == "bossDoor")
-        //{
-        //    levelToLoad = "BossCutScene";
-        //    StartCoroutine(Wait());
-
-        //    IEnumerator Wait()
-        //    {
-        //        yield return new WaitForSeconds(1.0f);
-        //        SceneManager.LoadScene(levelToLoad);
-        //    }
-        //}
     }
 }
