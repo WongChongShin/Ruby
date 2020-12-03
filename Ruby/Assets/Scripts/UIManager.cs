@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public AudioClip beep;
 
     AudioSource audio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,7 @@ public class UIManager : MonoBehaviour
 
     public void PlayBtnClicked()
     {
-        levelToLoad = "RubyChapter1Level1";
+        levelToLoad = "StoryStartScene";
         playBtnSound();
         StartCoroutine(Wait());
         SceneManager.LoadScene(levelToLoad);
@@ -58,6 +59,13 @@ public class UIManager : MonoBehaviour
     {
         levelToLoad = "RubyMainMenu";
         playBtnSound();
+        StartCoroutine(Wait());
+        SceneManager.LoadScene(levelToLoad);
+    }
+
+    public void StartGameBtnClicked()
+    {
+        levelToLoad = "RubyChapter1Level1";
         StartCoroutine(Wait());
         SceneManager.LoadScene(levelToLoad);
     }
