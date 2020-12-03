@@ -5,7 +5,7 @@ using UnityEngine;
 public class changePower : MonoBehaviour
 {
     public GameObject[] power;
-    private int powerNum = 0;
+    public static int powerNum = 0;
     private bool startPower = false;
     private bool displayPower = false;
     public Transform[] door;

@@ -81,6 +81,25 @@ public class shootFireBall : MonoBehaviour
             {
                 change = 0;
             }
+            
+        }
+        if (change == 0)
+        {
+            powerball[0].SetActive(true);
+            powerball[1].SetActive(false);
+            powerball[2].SetActive(false);
+        }
+        else if (change == 1)
+        {
+            powerball[0].SetActive(false);
+            powerball[1].SetActive(true);
+            powerball[2].SetActive(false);
+        }
+        else if (change == 2)
+        {
+            powerball[0].SetActive(false);
+            powerball[1].SetActive(false);
+            powerball[2].SetActive(true);
         }
         if (checkAim == true)
         {
@@ -92,11 +111,11 @@ public class shootFireBall : MonoBehaviour
                 }
                 else if (change == 1)
                 {
-                    red_power_ball();
+                    blue_power_ball();
                 }
                 else if (change == 2)
                 {
-                    blue_power_ball();
+                    red_power_ball();
                 }
             }
         }
