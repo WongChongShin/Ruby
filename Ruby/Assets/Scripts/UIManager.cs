@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public AudioClip beep;
 
     public static bool closeUserGuide = false;
+    public static bool closeCoinGuide = false;
 
     AudioSource audio;
 
@@ -75,5 +76,10 @@ public class UIManager : MonoBehaviour
     public void CloseUserGuide()
     {
         closeUserGuide = true;
+    }
+
+    public void CloseCoinGuide()
+    {
+        closeCoinGuide = true;
     }
 }

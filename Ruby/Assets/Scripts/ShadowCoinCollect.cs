@@ -8,6 +8,7 @@ public class ShadowCoinCollect : MonoBehaviour
     public static int numOfCoin = 0;
     public static bool textOn = false;
     private Text totalCoin;
+    //public GameObject shadowCoinDescription;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class ShadowCoinCollect : MonoBehaviour
         textOn = false;
         numOfCoin = 0;
         totalCoin.text = "x" + numOfCoin.ToString();
+
     }
 
     // Update is called once per frame
@@ -26,6 +28,7 @@ public class ShadowCoinCollect : MonoBehaviour
             if (numOfCoin >= 0)
             {
                 totalCoin.text = "x"  + numOfCoin.ToString();
+                //shadowCoinDescription.Enable();
             }
         }
     }
