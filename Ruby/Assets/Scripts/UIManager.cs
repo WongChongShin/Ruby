@@ -70,6 +70,8 @@ public class UIManager : MonoBehaviour
     {
         levelToLoad = "RubyChapter1Level1";
         StartCoroutine(Wait());
+        healthPoint.health += 3;
+        playerDie.die = false;
         SceneManager.LoadScene(levelToLoad);
     }
 
@@ -81,5 +83,13 @@ public class UIManager : MonoBehaviour
     public void CloseCoinGuide()
     {
         closeCoinGuide = true;
+    }
+
+    public void BackMainMenu()
+    {
+        levelToLoad = "RubyMainMenu";
+        playBtnSound();
+        StartCoroutine(Wait());
+        SceneManager.LoadScene(levelToLoad);
     }
 }

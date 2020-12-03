@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerDie : MonoBehaviour
 {
     public AudioClip rubyDieSound;
     AudioSource audio;
     public Animator anim;
-    private bool die = false;
+    public static bool die = false;
+    private string levelToLoad;
+
     // Start is called before the first frame update
     void Start()
     {
         audio = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
+             
     }
 
     // Update is called once per frame
@@ -26,7 +30,18 @@ public class playerDie : MonoBehaviour
                 anim.SetBool("isDead", true);
                 audio.clip = rubyDieSound;
                 audio.Play();
+
+                levelToLoad = "LoseScene";
+                StartCoroutine(Wait());
+                SceneManager.LoadScene(levelToLoad);
+
+
+                IEnumerator Wait()
+                {
+                    yield return new WaitForSeconds(3.0f);
+                }
             }
         }
+
     }
 }
