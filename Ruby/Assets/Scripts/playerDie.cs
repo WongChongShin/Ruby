@@ -33,12 +33,13 @@ public class playerDie : MonoBehaviour
 
                 levelToLoad = "LoseScene";
                 StartCoroutine(Wait());
-                SceneManager.LoadScene(levelToLoad);
+                
 
 
                 IEnumerator Wait()
                 {
                     yield return new WaitForSeconds(3.0f);
+                    SceneManager.LoadScene(levelToLoad);
                 }
             }
         }
