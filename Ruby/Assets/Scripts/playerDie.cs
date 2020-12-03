@@ -7,6 +7,7 @@ public class playerDie : MonoBehaviour
     public AudioClip rubyDieSound;
     AudioSource audio;
     public Animator anim;
+    private bool die = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +20,13 @@ public class playerDie : MonoBehaviour
     {
         if (healthPoint.health <= 0)
         {
-            anim.SetBool("isDead", true);
-            audio.clip = rubyDieSound;
-            audio.Play();
+            if (die == false)
+            {
+                die = true;
+                anim.SetBool("isDead", true);
+                audio.clip = rubyDieSound;
+                audio.Play();
+            }
         }
     }
 }
