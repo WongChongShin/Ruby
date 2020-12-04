@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     private string levelToLoad;
     public AudioClip beep;
+    public GameObject player;
 
     public static bool closeUserGuide = false;
     public static bool closeCoinGuide = false;
@@ -70,7 +71,8 @@ public class UIManager : MonoBehaviour
     {
         levelToLoad = "RubyChapter1Level1";
         StartCoroutine(Wait());
-        //playerDie.die = false;
+        healthPoint.health += 3;
+        playerDie.die = false;
         SceneManager.LoadScene(levelToLoad);
     }
 
