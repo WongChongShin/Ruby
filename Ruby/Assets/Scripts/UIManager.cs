@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     public static bool closeUserGuide = false;
     public static bool closeCoinGuide = false;
+    public static bool closeBossHint = false;
 
     AudioSource audio;
 
@@ -84,6 +85,11 @@ public class UIManager : MonoBehaviour
     public void CloseCoinGuide()
     {
         closeCoinGuide = true;
+    }
+
+    public void CloseBossHint()
+    {
+        closeBossHint = true;
     }
 
     public void BackMainMenu()

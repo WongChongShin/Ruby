@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class BossCutScene : MonoBehaviour
 {
-    private string levelToLoad;
+    //private string levelToLoad;
     private bool changeDialog = false;
     public Transform[] door;
     private bool notReadDoor = false;
@@ -31,7 +31,10 @@ public class BossCutScene : MonoBehaviour
             bossDialog.SetActive(true);
             Vector3 temp = new Vector3(556.3f, 54.6f, 478f);
             enemy.transform.position = temp;
-            StartCoroutine(Wait());
+        }
+        if (UIManager.closeBossHint == true)
+        {
+            Destroy(bossDialog);
         }
     }
     void getDoorPosition()
@@ -42,15 +45,8 @@ public class BossCutScene : MonoBehaviour
             {
                 changeDialog = true;
                 notReadDoor = true;
-
             }
         }
-    }
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(15f);
-        bossDialog.SetActive(false);
-        changeDialog = false;
     }
     
 }

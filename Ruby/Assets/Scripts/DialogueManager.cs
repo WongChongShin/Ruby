@@ -15,6 +15,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         sentences = new Queue<string>();
+        dialogueText.fontSize = 20;
     }
 
     public void StartDialogue(DialogueObject dialogue)
@@ -29,6 +30,7 @@ public class DialogueManager : MonoBehaviour
 
         foreach(string sentence in dialogue.sentences)
         {
+            //sentence.fontSize = 20;
             sentences.Enqueue(sentence);
         }
         DisplayNextSentence();
@@ -44,6 +46,7 @@ public class DialogueManager : MonoBehaviour
 
        string sentence = sentences.Dequeue();
        dialogueText.text = sentence;
+       //sentence.fontSize = 20;
        Debug.Log(sentence);
     }
 

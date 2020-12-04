@@ -12,7 +12,9 @@ public class PlayerCollision : MonoBehaviour
     public int numOfKey = 0;
     static public bool doorOpen = false;
     static public bool youNeedKey = false;
+    bool triggerCoinDes = false;
 
+    public GameObject coinDes;
 
     AudioSource audio;
     // Start is called before the first frame update
@@ -50,7 +52,6 @@ public class PlayerCollision : MonoBehaviour
             {
                 anim.SetBool("isPushing", true);
             }
-
         }
     }
 
@@ -64,6 +65,12 @@ public class PlayerCollision : MonoBehaviour
             ShadowCoinCollect.numOfCoin++;
             Destroy(collisionInfo.gameObject);
             ShadowCoinCollect.textOn = true;
+            triggerCoinDes = true;
+
+            if (triggerCoinDes = true)
+            {
+                coinDes.SetActive(true);
+            }
         }
 
         else if (collisionInfo.gameObject.tag == "Key")
