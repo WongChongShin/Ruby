@@ -13,6 +13,8 @@ public class UIManager : MonoBehaviour
     public static bool closeCoinGuide = false;
     public static bool closeBossHint = false;
 
+    public GameObject setting;
+
     AudioSource audio;
 
     // Start is called before the first frame update
@@ -90,6 +92,16 @@ public class UIManager : MonoBehaviour
     public void CloseBossHint()
     {
         closeBossHint = true;
+    }
+
+    public void CloseSetting()
+    {
+        setting.SetActive(false);
+    }
+
+    public void openSetting()
+    {
+        setting.SetActive(true);
     }
 
     public void BackMainMenu()
