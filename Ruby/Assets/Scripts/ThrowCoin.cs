@@ -10,7 +10,8 @@ public class ThrowCoin : MonoBehaviour
     private AudioSource audio;
 
     //teleport
-    public GameObject player; 
+    public GameObject player;
+    private int coinNum = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,11 @@ public class ThrowCoin : MonoBehaviour
     {
         if (Input.GetButtonDown("ThrowCoin") && ShadowCoinCollect.numOfCoin >= 5)
         {
-            StartCoroutine(wait());
+            if(coinNum == 0)
+            {
+                coinNum += 1;
+                StartCoroutine(wait());
+            }
         }
         
         IEnumerator wait()
@@ -40,7 +45,7 @@ public class ThrowCoin : MonoBehaviour
             }
 
             Rigidbody rb = temp.GetComponent<Rigidbody>();
-            rb.velocity = transform.TransformDirection(new Vector3(ThrowForce, 0, ThrowForce));
+            rb.velocity = transform.TransformDirection(new Vector3(0, 0, ThrowForce));
             audio.clip = throwSound;
             audio.Play();
             StartCoroutine(wait2());
@@ -49,6 +54,7 @@ public class ThrowCoin : MonoBehaviour
             {
                 yield return new WaitForSeconds(2);
                 player.transform.position = new Vector3(temp.transform.position.x, temp.transform.position.y+10, temp.transform.position.z);
+                coinNum = 0;
             }
             ShadowCoinCollect.numOfCoin -= 5;
         }
